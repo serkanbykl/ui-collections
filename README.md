@@ -1,5 +1,7 @@
 # ui-collections
 
+**Live site: [ui-collections.vercel.app](https://ui-collections.vercel.app)** · [glass](https://ui-collections.vercel.app/glass) · [tide](https://ui-collections.vercel.app/tide)
+
 Two collections of React components you copy into your project and own. The same components, props and behaviour, in two finishes:
 
 - **glass** — liquid glass on deep teal, frosted surfaces and calm motion, dark and light.
@@ -14,7 +16,7 @@ Built with Next.js, React 19, Tailwind CSS v4, Radix and Motion.
 Every item is a [shadcn](https://ui.shadcn.com) registry entry. Open it on the site and copy its install command, for example:
 
 ```sh
-npx shadcn@latest add https://<your-site>/r/glass/button.json
+npx shadcn@latest add https://ui-collections.vercel.app/r/glass/button.json
 ```
 
 ## Run locally
