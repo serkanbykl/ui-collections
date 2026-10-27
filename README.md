@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ui-collections
 
-## Getting Started
+Two collections of React components you copy into your project and own. The same components, props and behaviour, in two finishes:
 
-First, run the development server:
+- **glass** — liquid glass on deep teal, frosted surfaces and calm motion, dark and light.
+- **tide** — clean admin screens in fresh green on cool slate, light and dark.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Each collection has 200+ items: components, animated pieces, charts, blocks, full app screens, dashboards and a complete template (Lumen). The home page is a small sea with hamsi you can feed.
+
+Built with Next.js, React 19, Tailwind CSS v4, Radix and Motion.
+
+## Install a component
+
+Every item is a [shadcn](https://ui.shadcn.com) registry entry. Open it on the site and copy its install command, for example:
+
+```sh
+npx shadcn@latest add https://<your-site>/r/glass/button.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Then open [localhost:3001](http://localhost:3001) (home), [/glass](http://localhost:3001/glass) and [/tide](http://localhost:3001/tide).
 
-## Learn More
+Other scripts: `npm run build`, `npm run typecheck`, `npm run lint`, `npm run check:themes`.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site deploys to [Vercel](https://vercel.com) as is: import the repository and keep the defaults. Collections live under `/glass` and `/tide`, so no custom domain is needed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+With a domain of your own and wildcard DNS, the collections can live on subdomains instead (`glass.example.com`). Set these environment variables:
 
-## Deploy on Vercel
+```sh
+SITE_URL=https://example.com
+NEXT_PUBLIC_ROUTING=subdomain
+COLLECTION_ORIGIN=https://{id}.example.com
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project layout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/registry/kit/` — the installable source: ui, blocks, screens, dashboards, templates.
+- `src/catalog/` — metadata for every item; drives the docs and the registry.
+- `src/demos/` — live previews and usage examples.
+- `src/themes/` — the theme contract and one stylesheet per collection.
+- `src/app/main/` — the home page.
+
+Contributor rules live in [AGENTS.md](AGENTS.md).
+
+## Licence
+
+[MIT](LICENSE) © Serkan Baykal. All media in `public/media` is original work, released under CC0.

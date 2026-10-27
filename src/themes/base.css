@@ -1,0 +1,239 @@
+/*
+ * Shared layer for every collection: maps the theme contract
+ * (src/themes/contract.ts) onto Tailwind and defines the animations all
+ * themes share. Colours, shapes and surfaces come from src/themes/<id>.css.
+ */
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-bg-deep: var(--c-bg-deep);
+  --color-card: var(--c-card);
+  --color-fg: var(--c-fg);
+  --color-muted: var(--c-muted);
+  --color-subtle: var(--c-subtle);
+  --color-accent: var(--c-accent);
+  --color-accent-fg: var(--c-accent-fg);
+  /* Featured fills (the lead stat tile): the accent unless a mode needs a deeper, vivid one. */
+  --color-feature: var(--c-feature, var(--c-accent));
+  --color-feature-fg: var(--c-feature-fg, var(--c-accent-fg));
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-hover: var(--c-hover);
+  --color-field: var(--c-field);
+  --color-field-focus: var(--c-field-focus);
+  --color-surface-hover: var(--c-surface-hover);
+  --color-surface-selected: var(--c-surface-selected);
+  --color-success: var(--c-success);
+  --color-success-soft: var(--c-success-soft);
+  --color-warning: var(--c-warning);
+  --color-warning-soft: var(--c-warning-soft);
+  --color-info: var(--c-info);
+  --color-info-soft: var(--c-info-soft);
+  --color-danger: var(--c-danger);
+  --color-danger-soft: var(--c-danger-soft);
+
+  --radius-card: var(--r-card);
+  --radius-control: var(--r-control);
+  --radius-field: var(--r-field);
+
+  --font-display: var(--f-display);
+  --font-sans: var(--f-sans);
+
+  --ease-theme: var(--e-theme);
+}
+
+@theme {
+  --animate-rise: rise 0.75s var(--e-theme) backwards;
+  --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
+  --animate-drift: drift var(--drift-duration, 40s) ease-in-out infinite alternate;
+  --animate-pop-in: pop-in 0.2s var(--e-theme);
+  --animate-pop-out: pop-out 0.15s ease-in forwards;
+  --animate-fade-out: fade-out 0.15s ease-in forwards;
+  --animate-spin: spin 0.8s linear infinite;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise-distance, 14px));
+      filter: blur(var(--rise-blur, 0px));
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(var(--drift-x, 6%), var(--drift-y, -5%), 0) scale(1.08);
+    }
+    100% {
+      transform: translate3d(calc(var(--drift-x, 6%) * -0.6), calc(var(--drift-y, -5%) * -0.5), 0) scale(0.96);
+    }
+  }
+
+  /* Overlays: Radix waits for `animationend` on close, so exits must be
+     animations, not transitions. */
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      scale: 0.97;
+    }
+  }
+  /* A short swing for a bell with news; transform only. */
+  @keyframes bell-ring {
+    0%, 100% { rotate: 0deg; }
+    20% { rotate: 14deg; }
+    40% { rotate: -11deg; }
+    60% { rotate: 7deg; }
+    80% { rotate: -4deg; }
+  }
+
+  @keyframes pop-out {
+    to {
+      opacity: 0;
+      scale: 0.97;
+    }
+  }
+
+  /* Full-screen layers (overlays) fade without scaling, so no edge shows. */
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 150% 0;
+    }
+    to {
+      background-position: -50% 0;
+    }
+  }
+}
+
+/* Clickable card: rises a few pixels with a deeper shadow and an accent-tinted
+   edge, keeping its own fill so it never turns see-through. */
+@utility lift {
+  transition:
+    translate 0.3s var(--e-theme),
+    box-shadow 0.3s var(--e-theme),
+    border-color 0.3s var(--e-theme);
+  &:hover,
+  &:focus-visible {
+    translate: 0 -3px;
+    --surface-shadow: var(--shadow-lg);
+    --surface-border: color-mix(in oklab, var(--c-accent) 35%, var(--c-line));
+    --glass-depth: 0.55;
+  }
+  &:active {
+    translate: 0 -1px;
+  }
+}
+
+@utility hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-line-strong), transparent);
+}
+
+@layer base {
+  html {
+    /* Reserve the scrollbar's lane so content never shifts when a page starts to scroll. */
+    scrollbar-gutter: stable;
+    background-color: var(--c-bg);
+    color: var(--c-fg);
+  }
+
+  /* Dialogs, sheets and menus lock scrolling (react-remove-scroll) and pad the
+     body by the scrollbar's width. The gutter above already keeps that lane,
+     so the padding would push the page sideways; cancel it. */
+  html body[data-scroll-locked] {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    --removed-body-scroll-bar-size: 0px;
+  }
+
+  .font-display {
+    font-weight: var(--f-display-weight);
+    letter-spacing: var(--f-display-tracking);
+  }
+
+  /* Tailwind v4 resets buttons to the default cursor; every clickable thing
+     gets the pointer back, disabled things don't. */
+  :is(
+      button,
+      summary,
+      select,
+      input[type="range"],
+      input[type="checkbox"],
+      input[type="radio"],
+      label:has(> input:not(:disabled)),
+      [role="button"],
+      [role="tab"],
+      [role="option"],
+      [role="radio"],
+      [role="checkbox"],
+      [role="switch"],
+      [role="menuitem"],
+      [role="menuitemcheckbox"],
+      [role="menuitemradio"],
+      [cmdk-item]
+    ):not(:disabled, [aria-disabled="true"], [data-disabled=""], [data-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--c-accent) 35%, transparent);
+  }
+}
+
+/* Reveal: parts render hidden while their root has data-reveal="out", then
+   rise into place. Pure CSS, so `trigger="load"` animates before hydration.
+   `backwards` covers the delay and leaves no transform or filter behind:
+   a lingering blur(0) or translate keeps text on its own layer, which
+   renders it soft on Windows. */
+@layer components {
+  :is([data-reveal="out"] [data-reveal-part], [data-reveal="out"][data-reveal-part]) {
+    opacity: 0;
+  }
+
+  :is([data-reveal="in"] [data-reveal-part], [data-reveal="in"][data-reveal-part]) {
+    animation: var(--animate-rise);
+    animation-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * var(--reveal-stagger, 45ms));
+  }
+
+  /* Reduced motion calms a reveal rather than skipping it: parts fade in, in
+     the same order and timing, without the rise or the blur. */
+  @media (prefers-reduced-motion: reduce) {
+    :is([data-reveal="in"] [data-reveal-part], [data-reveal="in"][data-reveal-part]) {
+      animation-name: reveal-fade;
+    }
+  }
+
+  /* Without scripts a view-triggered part would never be told to show. */
+  @media (scripting: none) {
+    [data-reveal-part] {
+      opacity: 1;
+      animation: none !important;
+    }
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}

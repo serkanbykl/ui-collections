@@ -1,0 +1,233 @@
+/*
+ * tide — clean admin style: green on cool slate, light and dark, set in Geist.
+ * Implements the contract in src/themes/contract.ts.
+ *
+ * Dials are data attributes, so they work on <html> or on any element
+ * (previews scope them to a subtree):
+ *   data-mode     light | dark
+ *   data-accent   green | teal | olive | sage | gold | kalamata
+ *   data-radius   sharp | balanced | rounded
+ *   data-surface  bordered | elevated | flat
+ */
+
+[data-theme="tide"] {
+  color-scheme: light;
+
+  /* Neutrals match the LMS panel (cool slate); the accent stays olive. */
+  --c-bg: oklch(0.982 0.003 264);
+  --c-bg-deep: oklch(0.962 0.005 264);
+  --c-card: oklch(1 0 0);
+  --c-fg: oklch(0.15 0.018 265);
+  --c-muted: oklch(0.4 0.02 264);
+  --c-subtle: oklch(0.5 0.018 264);
+  --c-line: oklch(0.915 0.006 264);
+  --c-line-strong: oklch(0.86 0.008 264);
+  --c-hover: oklch(0.15 0.018 265 / 0.05);
+  --c-field: oklch(1 0 0);
+  --c-field-focus: var(--c-field);
+  /* Opaque: tide cards are solid, a translucent hover would show the page through. */
+  --c-surface-hover: oklch(0.97 0.004 264);
+  --c-surface-selected: color-mix(in oklab, var(--c-accent) 8%, var(--c-card));
+  --c-success: oklch(0.55 0.13 150);
+  --c-success-soft: oklch(0.95 0.04 150);
+  --c-warning: oklch(0.6 0.13 70);
+  --c-warning-soft: oklch(0.96 0.05 85);
+  --c-info: oklch(0.55 0.12 235);
+  --c-info-soft: oklch(0.95 0.03 235);
+  --c-danger: oklch(0.56 0.19 27);
+  --c-danger-soft: oklch(0.95 0.035 25);
+
+  /* Accent: green (default) — the LMS panel's green, deepened until white
+     text on it passes AA. */
+  --c-accent: oklch(0.55 0.125 163);
+  --c-accent-fg: oklch(0.995 0 0);
+  --c-aurora-1: oklch(0.88 0.07 163);
+  --c-aurora-2: oklch(0.92 0.04 200);
+  --c-aurora-3: oklch(0.86 0.06 150);
+
+  --r-card: 0.875rem;
+  --r-control: 0.625rem;
+  --r-field: 0.625rem;
+
+  --f-display: var(--font-tide-sans), ui-sans-serif, system-ui, sans-serif;
+  --f-sans: var(--font-tide-sans), ui-sans-serif, system-ui, sans-serif;
+  --f-display-weight: 600;
+  --f-display-tracking: -0.025em;
+
+  --e-theme: cubic-bezier(0.2, 0, 0, 1);
+  --hover-scale: 1;
+  --press-scale: 0.98;
+  --shine: 0;
+
+  --shadow-color: 222 30% 25%;
+  --shadow-xs: 0 1px 2px 0 hsl(var(--shadow-color) / 0.05);
+  --shadow-md: 0 1px 2px 0 hsl(var(--shadow-color) / 0.04), 0 4px 18px -2px hsl(var(--shadow-color) / 0.1);
+  --shadow-lg: 0 2px 6px -1px hsl(var(--shadow-color) / 0.06), 0 16px 36px -10px hsl(var(--shadow-color) / 0.2);
+  /* Backdrop colour pools start off on tide's flat admin surfaces; the
+     tuner's Backdrop colour dial brings them in. */
+  --aurora-strength: 0;
+  /* Balanced corners: ring slices get a soft, not full, rounding. */
+  --chart-corner: 0.4;
+  /* Surface buttons stay solid on hover; their edge and shadow firm up instead. */
+  --c-button-hover: var(--c-card);
+  /* --surface-border / --surface-shadow stay unset (fallbacks in .surface) so
+     a dark-mode subtree resolves its own line and shadow colours. */
+}
+
+/* Accents */
+[data-theme="tide"] [data-accent="gold"],
+[data-theme="tide"][data-accent="gold"] {
+  --c-accent: oklch(0.62 0.13 82);
+  --c-accent-fg: oklch(0.2 0.03 80);
+  --c-aurora-1: oklch(0.88 0.12 88);
+  --c-aurora-2: oklch(0.9 0.08 100);
+}
+[data-theme="tide"] [data-accent="olive"],
+[data-theme="tide"][data-accent="olive"] {
+  --c-accent: oklch(0.52 0.13 135);
+  --c-accent-fg: oklch(0.99 0.01 100);
+  --c-aurora-1: oklch(0.86 0.1 132);
+  --c-aurora-2: oklch(0.88 0.12 92);
+}
+[data-theme="tide"] [data-accent="sage"],
+[data-theme="tide"][data-accent="sage"] {
+  --c-accent: oklch(0.55 0.07 150);
+  --c-accent-fg: oklch(0.99 0.01 150);
+  --c-aurora-1: oklch(0.87 0.06 150);
+}
+/* Teal: glass's signature accent, shared so both collections offer it. */
+[data-theme="tide"] [data-accent="teal"],
+[data-theme="tide"][data-accent="teal"] {
+  --c-accent: oklch(0.55 0.1 195);
+  --c-accent-fg: oklch(0.99 0.01 200);
+  --c-aurora-1: oklch(0.88 0.06 190);
+  --c-aurora-2: oklch(0.9 0.04 220);
+}
+[data-theme="tide"] [data-accent="kalamata"],
+[data-theme="tide"][data-accent="kalamata"] {
+  --c-accent: oklch(0.42 0.09 340);
+  --c-accent-fg: oklch(0.99 0.01 340);
+  --c-aurora-1: oklch(0.85 0.06 340);
+}
+
+/* Dark mode */
+[data-theme="tide"][data-mode="dark"],
+[data-theme="tide"] [data-mode="dark"] {
+  color-scheme: dark;
+
+  --c-bg: oklch(0.165 0.012 265);
+  --c-bg-deep: oklch(0.145 0.011 265);
+  --c-card: oklch(0.205 0.014 265);
+  --c-fg: oklch(0.985 0.004 264);
+  --c-muted: oklch(0.8 0.014 264);
+  --c-subtle: oklch(0.68 0.014 264);
+  --c-line: oklch(1 0 0 / 0.085);
+  --c-line-strong: oklch(1 0 0 / 0.14);
+  --c-hover: oklch(1 0 0 / 0.06);
+  --c-field: oklch(0.205 0.014 265);
+  --c-surface-hover: oklch(0.235 0.014 265);
+  /* Re-derived here: var() resolves where it is declared, so a dark subtree
+     inside a light page would otherwise inherit the light card. */
+  --c-field-focus: var(--c-field);
+  --c-surface-selected: color-mix(in oklab, var(--c-accent) 8%, var(--c-card));
+  --c-button-hover: var(--c-card);
+  --c-success: oklch(0.78 0.15 150);
+  --c-success-soft: oklch(0.32 0.06 150 / 0.45);
+  --c-warning: oklch(0.83 0.14 80);
+  --c-warning-soft: oklch(0.34 0.06 80 / 0.45);
+  --c-info: oklch(0.78 0.12 235);
+  --c-info-soft: oklch(0.32 0.06 235 / 0.45);
+  --c-danger: oklch(0.73 0.17 25);
+  --c-danger-soft: oklch(0.34 0.08 25 / 0.45);
+  --c-accent: oklch(0.74 0.14 163);
+  --c-accent-fg: oklch(0.2 0.04 165);
+  --aurora-strength: 0;
+  /* The bright dark-mode accent turns pale as a fill; feature tiles go deep instead. */
+  --c-feature: color-mix(in oklab, var(--c-accent) 62%, black);
+  --c-feature-fg: oklch(0.995 0 0);
+  --c-aurora-1: oklch(0.42 0.09 163);
+  --c-aurora-2: oklch(0.38 0.06 200);
+  --c-aurora-3: oklch(0.34 0.05 150);
+
+  --shadow-color: 230 40% 3%;
+  --shadow-xs: 0 1px 2px 0 hsl(var(--shadow-color) / 0.35);
+  --shadow-md: 0 2px 4px -1px hsl(var(--shadow-color) / 0.4), 0 8px 16px -6px hsl(var(--shadow-color) / 0.45);
+  --shadow-lg: 0 8px 16px -6px hsl(var(--shadow-color) / 0.45), 0 20px 44px -12px hsl(var(--shadow-color) / 0.6);
+}
+[data-theme="tide"][data-mode="dark"][data-accent="olive"],
+[data-theme="tide"] [data-mode="dark"][data-accent="olive"] {
+  --c-accent: oklch(0.79 0.14 132);
+  --c-accent-fg: oklch(0.2 0.03 115);
+}
+[data-theme="tide"][data-mode="dark"][data-accent="gold"],
+[data-theme="tide"] [data-mode="dark"][data-accent="gold"] {
+  --c-accent: oklch(0.83 0.13 85);
+}
+[data-theme="tide"][data-mode="dark"][data-accent="sage"],
+[data-theme="tide"] [data-mode="dark"][data-accent="sage"] {
+  --c-accent: oklch(0.8 0.07 150);
+}
+[data-theme="tide"][data-mode="dark"][data-accent="teal"],
+[data-theme="tide"] [data-mode="dark"][data-accent="teal"] {
+  --c-accent: oklch(0.78 0.1 190);
+  --c-accent-fg: oklch(0.2 0.04 200);
+}
+[data-theme="tide"][data-mode="dark"][data-accent="kalamata"],
+[data-theme="tide"] [data-mode="dark"][data-accent="kalamata"] {
+  --c-accent: oklch(0.76 0.09 340);
+}
+
+/* Radius */
+[data-theme="tide"] [data-radius="sharp"],
+[data-theme="tide"][data-radius="sharp"] {
+  --r-card: 0.375rem;
+  --r-control: 0.25rem;
+  --r-field: 0.25rem;
+  /* Charts follow the corners: square ring ends, crisp columns. */
+  --chart-cap: butt;
+  --chart-bar-radius: 1;
+  --chart-corner: 0;
+}
+[data-theme="tide"] [data-radius="rounded"],
+[data-theme="tide"][data-radius="rounded"] {
+  --r-card: 1.25rem;
+  --r-control: 9999px;
+  --r-field: 0.875rem;
+  --chart-cap: round;
+  --chart-bar-radius: 8;
+  --chart-corner: 1;
+}
+
+/* Surface style */
+[data-theme="tide"] [data-surface="elevated"],
+[data-theme="tide"][data-surface="elevated"] {
+  --surface-border: transparent;
+  --surface-shadow: var(--shadow-md);
+}
+[data-theme="tide"] [data-surface="flat"],
+[data-theme="tide"][data-surface="flat"] {
+  --surface-border: transparent;
+  --surface-shadow: none;
+  --c-card: var(--c-bg-deep);
+}
+
+@layer components {
+  [data-theme="tide"] .surface {
+    position: relative;
+    background-color: var(--c-card);
+    border: 1px solid var(--surface-border, var(--c-line));
+    box-shadow: var(--surface-shadow, var(--shadow-xs));
+  }
+
+  [data-theme="tide"] .surface-raised {
+    position: relative;
+    background-color: var(--c-card);
+    border: 1px solid var(--c-line);
+    box-shadow: var(--shadow-lg);
+  }
+
+  [data-theme="tide"] .surface-field {
+    background-color: var(--c-field);
+    border: 1px solid var(--c-line-strong);
+  }
+}

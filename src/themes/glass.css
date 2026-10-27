@@ -1,0 +1,262 @@
+/*
+ * glass — liquid glass on deep teal, one sans face (Geist).
+ * Dark by default; data-mode="light" switches to frosted glass over ice.
+ * Implements the contract in src/themes/contract.ts.
+ *
+ * Attributes: data-accent teal | green | sky | violet | amber | rose,
+ *             data-radius sharp | balanced | rounded (default).
+ *
+ * Glass dials (set on :root or any ancestor to retune the glass inside):
+ *   --glass-blur      backdrop blur, length          (14px)
+ *   --glass-saturate  backdrop saturation, %         (180%)
+ *   --glass-tint      white fill opacity, 0–1        (0.06)
+ *   --glass-rim       rim highlight opacity, 0–1     (0.5)
+ *   --glass-shine     specular edge + glow, 0–1      (0.35)
+ *   --glass-depth     drop shadow opacity, 0–1       (0.35)
+ */
+
+/* Dark colours: the default, and any subtree marked data-mode="dark" (code
+   wells stay dark inside light pages). Mode-independent tokens follow below,
+   so a dark subtree doesn't reset the visitor's other dials. */
+[data-theme="glass"],
+[data-theme="glass"] [data-mode="dark"] {
+  color-scheme: dark;
+
+  /* Near-black with a trace of deep teal; the aurora supplies the colour. */
+  --c-bg: hsl(205 55% 5.5%);
+  --c-bg-deep: hsl(206 60% 3%);
+  --c-card: hsl(204 40% 9%);
+  --c-fg: hsl(0 0% 100%);
+  --c-muted: hsl(220 6% 68%);
+  --c-subtle: hsl(220 6% 54%);
+  --c-accent: hsl(172 64% 80%);
+  --c-accent-fg: hsl(203 100% 7%);
+  --c-feature: hsl(174 72% 30%);
+  /* Glass needs colour behind it to refract, but softer than full strength. */
+  --aurora-strength: 0.2;
+  --c-feature-fg: hsl(0 0% 100%);
+  --c-line: rgb(255 255 255 / 0.1);
+  --c-line-strong: rgb(255 255 255 / 0.18);
+  --c-hover: rgb(255 255 255 / 0.06);
+  --c-field: rgb(255 255 255 / 0.02);
+  --c-field-focus: rgb(255 255 255 / 0.05);
+  /* Glass surfaces paint with background-image, so these sit under the pane as a glow. */
+  --c-surface-hover: rgb(255 255 255 / 0.05);
+  --c-surface-selected: rgb(255 255 255 / 0.09);
+  --c-success: oklch(0.84 0.13 160);
+  --c-success-soft: oklch(0.84 0.13 160 / 0.14);
+  --c-warning: oklch(0.86 0.13 85);
+  --c-warning-soft: oklch(0.86 0.13 85 / 0.14);
+  --c-info: oklch(0.82 0.1 230);
+  --c-info-soft: oklch(0.82 0.1 230 / 0.14);
+  --c-danger: oklch(0.8 0.13 15);
+  --c-danger-soft: oklch(0.8 0.13 15 / 0.14);
+  --c-aurora-1: hsl(172 45% 60%);
+  --c-aurora-2: hsl(208 75% 26%);
+  --c-aurora-3: hsl(190 65% 17%);
+
+  /* Glass material per mode: white fill added under the tint, shadow colour. */
+  --glass-fill-base: 0;
+  --glass-shadow-rgb: 0 0 0;
+  /* Raised layers (menus, dialogs) sit on a dim fill so the page behind
+     can't be read through them. */
+  --glass-raised-fill: rgb(0 14 24 / 0.62);
+}
+
+[data-theme="glass"] {
+  --r-card: 1.5rem;
+  --r-control: 9999px;
+  --r-field: 1rem;
+
+  --f-display: var(--font-glass-sans), ui-sans-serif, system-ui, sans-serif;
+  --f-sans: var(--font-glass-sans), ui-sans-serif, system-ui, sans-serif;
+  --f-display-weight: 600;
+  --f-display-tracking: -0.025em;
+
+  --e-theme: cubic-bezier(0.22, 1, 0.36, 1);
+  --hover-scale: 1.015;
+  --press-scale: 0.985;
+  --shine: 1;
+}
+
+/* Light mode: frosted white glass over pale ice, deep navy type. Works on
+   <html> or any subtree (previews scope it). */
+[data-theme="glass"][data-mode="light"],
+[data-theme="glass"] [data-mode="light"] {
+  color-scheme: light;
+
+  --c-bg: oklch(0.975 0.002 240);
+  --c-bg-deep: oklch(0.955 0.003 240);
+  --c-card: oklch(0.997 0.002 222);
+  --c-fg: oklch(0.24 0.055 245);
+  --c-muted: oklch(0.45 0.045 240);
+  --c-subtle: oklch(0.58 0.035 235);
+  --c-accent: oklch(0.55 0.1 195);
+  --c-accent-fg: oklch(0.99 0.01 200);
+  --c-feature: var(--c-accent);
+  --c-feature-fg: var(--c-accent-fg);
+  --aurora-strength: 0.2;
+  --c-line: oklch(0.24 0.055 245 / 0.1);
+  --c-line-strong: oklch(0.24 0.055 245 / 0.18);
+  --c-hover: oklch(0.24 0.055 245 / 0.05);
+  --c-field: rgb(255 255 255 / 0.55);
+  --c-field-focus: rgb(255 255 255 / 0.8);
+  --c-surface-hover: rgb(255 255 255 / 0.3);
+  --c-surface-selected: rgb(255 255 255 / 0.5);
+  --c-success: oklch(0.52 0.12 160);
+  --c-success-soft: oklch(0.52 0.12 160 / 0.12);
+  --c-warning: oklch(0.58 0.13 70);
+  --c-warning-soft: oklch(0.6 0.13 75 / 0.14);
+  --c-info: oklch(0.52 0.12 240);
+  --c-info-soft: oklch(0.52 0.12 240 / 0.12);
+  --c-danger: oklch(0.55 0.18 25);
+  --c-danger-soft: oklch(0.55 0.18 25 / 0.12);
+  --c-aurora-1: oklch(0.94 0.018 185);
+  --c-aurora-2: oklch(0.93 0.015 235);
+  --c-aurora-3: oklch(0.95 0.015 165);
+
+  --glass-fill-base: 0.5;
+  --glass-shadow-rgb: 20 45 80;
+  --glass-raised-fill: transparent;
+}
+
+/* Accents. Teal is the default. Dark values first, then light ones, which
+   need the extra attribute to win over the light block above. */
+/* Green: tide's signature accent, shared so both collections offer it. */
+[data-theme="glass"][data-accent="green"],
+[data-theme="glass"] [data-accent="green"] {
+  --c-accent: hsl(152 62% 70%);
+  --c-accent-fg: hsl(155 60% 8%);
+  --c-feature: hsl(158 62% 28%);
+}
+[data-theme="glass"][data-accent="sky"],
+[data-theme="glass"] [data-accent="sky"] {
+  --c-accent: hsl(205 92% 78%);
+  --c-accent-fg: hsl(212 100% 8%);
+  --c-feature: hsl(208 72% 36%);
+}
+[data-theme="glass"][data-accent="violet"],
+[data-theme="glass"] [data-accent="violet"] {
+  --c-accent: hsl(258 90% 84%);
+  --c-accent-fg: hsl(260 60% 10%);
+  --c-feature: hsl(258 50% 44%);
+}
+[data-theme="glass"][data-accent="amber"],
+[data-theme="glass"] [data-accent="amber"] {
+  --c-accent: hsl(40 95% 72%);
+  --c-accent-fg: hsl(30 60% 8%);
+  --c-feature: hsl(30 72% 38%);
+}
+[data-theme="glass"][data-accent="rose"],
+[data-theme="glass"] [data-accent="rose"] {
+  --c-accent: hsl(345 90% 84%);
+  --c-accent-fg: hsl(345 60% 10%);
+  --c-feature: hsl(345 52% 44%);
+}
+:is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="green"] {
+  --c-accent: oklch(0.55 0.125 163);
+  --c-accent-fg: oklch(0.995 0 0);
+}
+:is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="sky"] {
+  --c-accent: oklch(0.55 0.13 245);
+  --c-accent-fg: oklch(0.99 0.01 245);
+}
+:is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="violet"] {
+  --c-accent: oklch(0.52 0.16 290);
+  --c-accent-fg: oklch(0.99 0.01 290);
+}
+:is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="amber"] {
+  --c-accent: oklch(0.7 0.14 70);
+  --c-accent-fg: oklch(0.2 0.04 60);
+}
+:is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="rose"] {
+  --c-accent: oklch(0.55 0.17 10);
+  --c-accent-fg: oklch(0.99 0.01 10);
+}
+
+/* Corners. "rounded" is glass's own soft default; charts follow along. */
+[data-theme="glass"] {
+  --chart-bar-radius: 6;
+}
+[data-theme="glass"][data-radius="sharp"],
+[data-theme="glass"] [data-radius="sharp"] {
+  --r-card: 0.5rem;
+  --r-control: 0.375rem;
+  --r-field: 0.375rem;
+  --chart-cap: butt;
+  --chart-bar-radius: 1;
+  --chart-corner: 0;
+}
+[data-theme="glass"][data-radius="balanced"],
+[data-theme="glass"] [data-radius="balanced"] {
+  --r-card: 1rem;
+  --r-control: 0.75rem;
+  --r-field: 0.625rem;
+  --chart-bar-radius: 4;
+  --chart-corner: 0.4;
+}
+
+@layer components {
+  /* Liquid glass: a clear, saturated pane lit from the top left, with a
+     specular rim, a faint inner glow and a soft shadow underneath. The shell
+     must not scroll: its ::before rim would scroll away with the content. */
+  [data-theme="glass"] :is(.surface, .surface-raised) {
+    position: relative;
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / calc(var(--glass-fill-base) + (var(--glass-tint, 0.06) + var(--glass-tint-boost, 0)) * 1.6)),
+      rgb(255 255 255 / calc(var(--glass-fill-base) * 0.6 + (var(--glass-tint, 0.06) + var(--glass-tint-boost, 0)) * 0.5))
+    );
+    backdrop-filter: blur(calc(var(--glass-blur, 14px) + var(--glass-blur-boost, 0px)))
+      saturate(calc(var(--glass-saturate, 180%) + var(--glass-saturate-boost, 0%))) brightness(1.04);
+    box-shadow:
+      inset 1px 1px 0 -0.5px rgb(255 255 255 / var(--glass-shine, 0.35)),
+      inset -1px -1px 0 -0.5px rgb(255 255 255 / calc(var(--glass-shine, 0.35) * 0.45)),
+      inset 0 0 14px rgb(255 255 255 / calc(var(--glass-shine, 0.35) * 0.12)),
+      0 18px 40px -14px rgb(var(--glass-shadow-rgb) / var(--glass-depth, 0.35));
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgb(255 255 255 / calc(var(--glass-rim, 0.5) + var(--glass-rim-boost, 0))) 0%,
+        rgb(255 255 255 / calc((var(--glass-rim, 0.5) + var(--glass-rim-boost, 0)) / 4)) 28%,
+        transparent 45% 55%,
+        rgb(255 255 255 / calc((var(--glass-rim, 0.5) + var(--glass-rim-boost, 0)) / 4)) 72%,
+        rgb(255 255 255 / calc((var(--glass-rim, 0.5) + var(--glass-rim-boost, 0)) * 0.8)) 100%
+      );
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+  }
+
+  /* Denser glass for menus, popovers and dialogs over busy content. Boosts
+     add to the dials instead of replacing them, so the tuner still reaches
+     raised layers (at the defaults: 28px blur, 0.1 tint, 0.55 rim). */
+  [data-theme="glass"] .surface-raised {
+    --glass-tint-boost: 0.04;
+    --glass-blur-boost: 14px;
+    --glass-rim-boost: 0.05;
+    background-color: var(--glass-raised-fill);
+  }
+
+  /* Over light pages a clear pane lets the text behind it compete with its
+     own; raised layers become near-opaque frost so only colour shows through
+     (40px blur and 160% saturation at the defaults). */
+  :is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"]) .surface-raised {
+    --glass-fill-base: 0.82;
+    --glass-blur-boost: 26px;
+    --glass-saturate-boost: -20%;
+  }
+
+  [data-theme="glass"] .surface-field {
+    background-color: var(--c-field);
+    border: 1px solid var(--c-line-strong);
+  }
+}
