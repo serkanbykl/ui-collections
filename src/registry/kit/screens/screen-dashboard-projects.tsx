@@ -193,7 +193,7 @@ export function ProjectsDashboardScreen({ data = sampleProjectsData, projectHref
             {data.deadlines.map((d) => (
               <li key={d.id} className="flex items-center gap-3">
                 <span className="grid w-12 shrink-0 place-items-center rounded-field border border-line py-1.5 text-center">
-                  <span className="text-[11px] text-muted uppercase">{d.date.split(" ")[0]}</span>
+                  <span className="text-xs text-muted">{d.date.split(" ")[0]}</span>
                   <span className="text-sm font-medium tabular-nums">{d.date.split(" ")[1]}</span>
                 </span>
                 <div className="min-w-0">

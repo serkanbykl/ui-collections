@@ -93,7 +93,7 @@ const wordmarkStyles = [
 
 export function Customers({
   eyebrow = "Customers",
-  title = "4,183 teams ship with Lumen.",
+  title = "4,183 teams ship with Lumen",
   lead = "From three-person studios to listed fintechs. Here's what changed for a few of them.",
   headingLevel = "h1",
   logos = defaultLogos,
@@ -187,7 +187,7 @@ export function Customers({
       </div>
 
       <div className="mx-auto max-w-6xl px-5 py-20 text-center sm:px-8">
-        <h2 className="mx-auto max-w-2xl font-display text-4xl md:text-5xl">Your team could be the next story.</h2>
+        <h2 className="mx-auto max-w-2xl font-display text-4xl md:text-5xl">Your team could be the next story</h2>
         <p className="mx-auto mt-4 max-w-lg text-muted">Free for 14 days. Most teams run their first review within the hour.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a href={signUpHref} className={buttonVariants({ variant: "solid", size: "lg" })}>

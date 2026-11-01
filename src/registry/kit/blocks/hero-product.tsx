@@ -4,7 +4,6 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import { cn } from "@/registry/kit/lib/utils";
 import { AppWindow } from "@/registry/kit/ui/app-window";
-import { Badge } from "@/registry/kit/ui/badge";
 import { BarList, type BarListItem } from "@/registry/kit/ui/bar-list";
 import { ButtonShine, buttonVariants } from "@/registry/kit/ui/button";
 import { ChartArea } from "@/registry/kit/ui/chart-area";
@@ -223,9 +222,9 @@ const wordmarkStyles = [
  * customer wordmarks underneath.
  */
 export function HeroProduct({
-  badge = "Funnels 2.0 is live",
+  badge = "Funnels 2.0 release notes",
   badgeHref = "/changelog",
-  title = "Know what visitors do, without cookies.",
+  title = "Know what visitors do, without cookies",
   description = "Privacy-friendly analytics with every answer on one screen. Add one script and see your first visitors in a minute.",
   primary = { label: "Start free trial", href: "/signup" },
   secondary = { label: "Open live demo", href: "/demo" },
@@ -252,9 +251,8 @@ export function HeroProduct({
           <Reveal trigger="load">
             <a
               href={badgeHref}
-              className="surface inline-flex items-center gap-2 rounded-control py-1 pr-3.5 pl-1 text-xs text-fg/85 transition-colors hover:bg-surface-hover focus-visible:outline-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-1.5 rounded-control text-sm text-muted transition-colors hover:text-fg focus-visible:outline-2 focus-visible:outline-accent"
             >
-              <Badge variant="accent-solid">New</Badge>
               {badge}
               <span aria-hidden>→</span>
             </a>
@@ -291,10 +289,6 @@ export function HeroProduct({
       </div>
 
       <Reveal trigger="load" delay={560} className="relative mx-auto mt-12 max-w-6xl md:mt-16">
-        <div
-          aria-hidden
-          className="absolute inset-x-[8%] -top-6 bottom-10 -z-10 rounded-[50%] bg-accent/25 blur-3xl"
-        />
         <AppWindow url={url} className="shadow-[0_40px_90px_-30px_rgb(0_0_0/0.45)]">
           {visual ?? <ProductPreview />}
         </AppWindow>

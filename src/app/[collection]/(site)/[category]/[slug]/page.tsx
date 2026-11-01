@@ -76,7 +76,7 @@ async function EntryDoc({ params }: { params: Params }) {
     <article>
       <header className="max-w-2xl">
         <div className="flex items-center gap-3">
-          <Link href={`/${entry.category}`} className="text-xs tracking-[0.2em] text-muted uppercase hover:text-fg">
+          <Link href={`/${entry.category}`} className="text-xs text-muted hover:text-fg">
             {categories[entry.category].title}
           </Link>
           <EngineBadge engine={entry.engine} />

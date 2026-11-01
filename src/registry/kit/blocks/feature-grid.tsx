@@ -26,7 +26,7 @@ export interface FeatureGridProps {
 
 export function FeatureGrid({
   eyebrow = "Platform",
-  title = "Everything a deploy needs, nothing it doesn't.",
+  title = "Everything a deploy needs, nothing it doesn't",
   description = "Six building blocks that cover the path from commit to customer.",
   features = defaultFeatures,
 }: FeatureGridProps) {
@@ -34,7 +34,7 @@ export function FeatureGrid({
     <section className="bg-bg px-6 py-24 text-fg md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <div className="text-xs tracking-[0.2em] text-muted uppercase">{eyebrow}</div>
+          <div className="text-xs text-muted">{eyebrow}</div>
           <TextReveal as="h2" trigger="view" className="mt-5 font-display text-4xl leading-[1.02] md:text-6xl">
             {title}
           </TextReveal>

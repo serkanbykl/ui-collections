@@ -151,7 +151,7 @@ export function StoreFooter({
           >
             {columns.map((col) => (
               <div key={col.title}>
-                <h2 className="text-xs font-medium tracking-[0.16em] text-muted uppercase">
+                <h2 className="text-xs font-medium text-muted">
                   {col.title}
                 </h2>
                 <ul className="mt-4 grid gap-2.5 text-sm">

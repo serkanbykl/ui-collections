@@ -38,7 +38,7 @@ const defaultUpdates: MaintenanceUpdate[] = [
 const dot = { info: "bg-info", success: "bg-success", warning: "bg-warning" };
 
 export function Maintenance({
-  title = "We're upgrading the database.",
+  title = "We're upgrading the database",
   description = "Your data is safe. Sign-in and sync are paused until the migration finishes.",
   schedule = "Sun 26 Oct, 08:00–10:30 UTC",
   progress = 64,

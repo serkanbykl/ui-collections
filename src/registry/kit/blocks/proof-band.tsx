@@ -47,7 +47,7 @@ const defaultQuotes: ProofQuote[] = [
  */
 export function ProofBand({
   eyebrow = "Proof",
-  title = "Teams measure the difference in days.",
+  title = "Teams measure the difference in days",
   metrics = defaultMetrics,
   quotes = defaultQuotes,
   action,

@@ -48,14 +48,14 @@ export function TableHead({ className, sort, onSort, children, ...props }: Table
     <th
       scope="col"
       aria-sort={sortable ? sort || "none" : undefined}
-      className={cn("h-11 px-4 text-xs font-medium tracking-[0.08em] whitespace-nowrap text-muted uppercase", className)}
+      className={cn("h-11 px-4 text-xs font-medium whitespace-nowrap text-muted", className)}
       {...props}
     >
       {sortable ? (
         <button
           type="button"
           onClick={onSort}
-          className="group/sort -mx-1.5 inline-flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 uppercase transition-colors hover:text-fg focus-visible:outline-2 focus-visible:outline-accent"
+          className="group/sort -mx-1.5 inline-flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 transition-colors hover:text-fg focus-visible:outline-2 focus-visible:outline-accent"
         >
           {children}
           <svg

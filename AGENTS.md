@@ -85,6 +85,18 @@ The full workflow lives in the `template-design` skill (`.claude/skills/template
 - **Readable measure:** hero headline and subhead within about 680 px; headings use `text-balance`, body copy `text-pretty`, so no line ends on a single orphaned word.
 - **Search and answer engines:** evergreen pages are indexed with a plain-language FAQ (`FAQPage` JSON-LD); ad-only and time-bound pages are noindex.
 
+## Rule 5 — craft
+
+The theme owns the look; these rules keep pieces from drifting into generic, machine-made UI. The `design-review` skill (`.claude/skills/design-review/SKILL.md`) walks a screen through them.
+
+- **Type.** Sentence case everywhere, including small labels, table headers, menu groups and eyebrows: no `uppercase` with wide tracking. Weights 400–500, 600 only for rare emphasis; hierarchy comes from size and colour. Negative tracking only on display text (`font-display`), never on text under 16 px. Figures use `tabular-nums` and one format per screen.
+- **Headlines** end without a period. Paragraphs keep theirs. A headline names this product's nouns; if swapping the brand name leaves it true, rewrite it.
+- **Colour.** The accent marks the one or two things that matter on a screen: the primary action, the selection, one key figure. No hue-to-hue gradients, gradient text, coloured glows (`shadow-[0_0_Npx_colour]`) or blurred colour blobs behind content. Depth comes from surface steps and hairlines. Focus rings (`0 0 0 4px` spread) are fine.
+- **Badges and proof.** No "New" pills above a hero; real news is a quiet text link. Claims such as "Trusted by…" or "Loved by…" are either specific ("4,183 teams ship with Lumen") or gone.
+- **Motion** explains something. Loops (`animate-ping`, pulsing, breathing glows) only on things that are actually live. Hover is a colour or surface change, press a small scale down; buttons and cards don't grow on hover. Transition named properties, never `transition-all`, and never layout properties.
+- **Details.** Spacing on the 4 px scale; equal things get equal sizes. Nested radius = outer radius − padding (min 4 px). Stat cards are a label, a figure and a change with what it compares to ("+12% vs last month").
+- **Exceptions.** A component whose purpose *is* the effect (shimmer text, aurora backdrop, glass surfaces, live indicator) keeps it. Fake brand wordmarks in logo clouds may use any casing.
+
 ## Layout
 
 - `src/registry/` — installable source (ui, blocks, dashboards, hooks, lib).

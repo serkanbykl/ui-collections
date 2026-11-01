@@ -242,9 +242,9 @@ export function LumenHome() {
   return (
     <>
       <HeroProduct
-        badge="Funnels 2.0 is live"
+        badge="Read what changed in Funnels 2.0"
         badgeHref={href("/changelog")}
-        title="Know what visitors do, without cookies."
+        title="Know what visitors do, without cookies"
         description="Where people come from, what they read and where they drop off, on one screen. No consent banner in their way."
         primary={primaryCta}
         secondary={{ label: "Open the live demo", href: href("/app") }}
@@ -256,13 +256,13 @@ export function LumenHome() {
       />
       <BentoFeatures
         eyebrow="Why Lumen"
-        title="Clear answers, and nothing stored on their devices."
+        title="Clear answers, and nothing stored on their devices"
         description="What teams get in their first month, in their own numbers."
         items={bento}
       />
       <InstallSnippet
         eyebrow="How it works"
-        title="Live in five minutes, in three steps."
+        title="Live in five minutes, in three steps"
         description="No tag manager, no consent setup, no data team."
         steps={steps}
         snippets={snippets}
@@ -271,7 +271,7 @@ export function LumenHome() {
       />
       <ProofBand
         eyebrow="Customers"
-        title="Teams switched and stopped worrying."
+        title="Teams switched and stopped worrying"
         metrics={metrics}
         quotes={quotes}
         action={{ label: "Read customer stories", href: href("/customers") }}
@@ -283,7 +283,7 @@ export function LumenHome() {
       </section>
       <VsList
         eyebrow="Compared"
-        title="Lumen vs the usual analytics."
+        title="Lumen vs the usual analytics"
         description="Same questions answered, without the banner, the weight or the ad network."
         us="Lumen"
         them="The usual analytics"
@@ -293,14 +293,14 @@ export function LumenHome() {
       <Faq
         compact
         structuredData
-        title="Questions, answered."
+        title="Questions, answered"
         description="Still curious? A person replies within a day."
         contact={{ label: "Email hello@lumen.example", href: "mailto:hello@lumen.example" }}
         items={faq}
       />
       <CtaPanel
         compact
-        title="Start measuring in five minutes."
+        title="Start measuring in five minutes"
         description="Add one script tag and watch your first visitors arrive."
         primary={primaryCta}
         secondary={{ label: "Compare plans", href: href("/pricing") }}

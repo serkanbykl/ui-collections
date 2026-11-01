@@ -49,7 +49,7 @@ const check = (
  */
 export function VsList({
   eyebrow = "Compared",
-  title = "What changes when you switch.",
+  title = "What changes when you switch",
   description = "The same jobs, done with fewer moving parts.",
   us = "Brightline",
   them = "The usual monitoring stack",

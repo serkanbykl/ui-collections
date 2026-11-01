@@ -19,7 +19,7 @@ export interface HeroVideoProps {
 export function HeroVideo({
   videoSrc = defaultVideo,
   poster = defaultPoster,
-  title = "Write the code. We'll handle the rest.",
+  title = "Write the code, we'll handle the rest",
   description = "Previews for every branch, rollbacks in one click and logs you can actually read.",
   action = { label: "Deploy your first app", href: "/signup" },
 }: HeroVideoProps) {

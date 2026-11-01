@@ -71,7 +71,7 @@ export function DropdownMenuCheckboxItem({ className, children, ...props }: Comp
 }
 
 export function DropdownMenuLabel({ className, ...props }: ComponentProps<typeof MenuPrimitive.Label>) {
-  return <MenuPrimitive.Label className={cn("px-3 pt-2 pb-1 text-[11px] tracking-[0.16em] text-muted uppercase", className)} {...props} />;
+  return <MenuPrimitive.Label className={cn("px-3 pt-2 pb-1 text-xs text-muted", className)} {...props} />;
 }
 
 export function DropdownMenuSeparator({ className, ...props }: ComponentProps<typeof MenuPrimitive.Separator>) {

@@ -113,7 +113,7 @@ export function SettingsConnectionsScreen({
           {visible.map((item) => (
             <li key={item.id} className="surface flex flex-col gap-4 rounded-card p-5">
               <div className="flex items-start gap-3">
-                <span aria-hidden className={cn("grid size-11 shrink-0 place-items-center rounded-field text-sm font-bold", item.tint)}>
+                <span aria-hidden className={cn("grid size-11 shrink-0 place-items-center rounded-field text-sm font-semibold", item.tint)}>
                   {item.name
                     .split(" ")
                     .map((w) => w[0])

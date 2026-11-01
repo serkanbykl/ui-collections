@@ -26,7 +26,7 @@ const defaultIntegrations: Integration[] = [
 ];
 
 export function IntegrationsGrid({
-  title = "Plays well with your stack.",
+  title = "Plays well with your stack",
   integrations = defaultIntegrations,
   onConnect,
 }: {
@@ -87,7 +87,7 @@ export function IntegrationsGrid({
                   )}
                 </div>
                 <h3 className="mt-6 text-lg font-medium">{item.name}</h3>
-                <p className="text-xs tracking-[0.15em] text-muted uppercase">{item.category}</p>
+                <p className="text-xs text-muted">{item.category}</p>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
                 {failed === item.name && (
                   <p role="alert" className="mt-3 text-xs text-danger">

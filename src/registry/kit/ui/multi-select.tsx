@@ -93,7 +93,7 @@ export function MultiSelect<T extends string>({
               <Command.Empty className="px-3 py-6 text-center text-sm text-muted">No matches. Try a shorter search.</Command.Empty>
               <Command.Group
                 heading={label}
-                className="[&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pt-1.5 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:tracking-[0.16em] [&_[cmdk-group-heading]]:text-muted [&_[cmdk-group-heading]]:uppercase"
+                className="[&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pt-1.5 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:text-muted"
               >
                 {options.map((option) => {
                   const checked = selected.has(option.value);

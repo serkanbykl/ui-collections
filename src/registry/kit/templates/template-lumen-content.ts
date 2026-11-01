@@ -16,7 +16,7 @@ import type { CaseStudyCard } from "@/registry/kit/blocks/customers";
 /* ---------------------------------------------------------------- about */
 
 export const about = {
-  title: "Analytics that respect the people being counted.",
+  title: "Analytics that respect the people being counted",
   lead: "Lumen is a small, independent company in Berlin and Istanbul. We build product analytics that answer real questions without cookies, profiles or a consent banner.",
   stats: [
     { value: 38_214, label: "sites measured" },
@@ -242,7 +242,7 @@ export const caseStudies: LumenCaseStudy[] = [
     slug: "polaris",
     company: "Polaris",
     industry: "SaaS",
-    title: "How Polaris dropped its cookie banner and 11.4% of its bounces.",
+    title: "How Polaris dropped its cookie banner and 11.4% of its bounces",
     summary: "A 62-person SaaS company replaced Google Analytics with Lumen, removed its consent pop-up and finally got numbers that matched its sales data.",
     metrics: [
       { value: 11.4, decimals: 1, suffix: "%", label: "fewer bounces in the first week" },
@@ -286,7 +286,7 @@ export const caseStudies: LumenCaseStudy[] = [
     slug: "orbitly",
     company: "Orbitly",
     industry: "SaaS",
-    title: "How Orbitly found one confusing step and lifted trials 18%.",
+    title: "How Orbitly found one confusing step and lifted trials 18%",
     summary: "A product team used Lumen funnels to see where sign-ups stalled during onboarding, fixed one screen and measured the change the same week.",
     metrics: [
       { value: 18, suffix: "%", label: "more trials started" },
@@ -326,7 +326,7 @@ export const caseStudies: LumenCaseStudy[] = [
     slug: "marlow-finch",
     company: "Marlow & Finch",
     industry: "Agencies",
-    title: "How Marlow & Finch replaced monthly PDF reports with live links.",
+    title: "How Marlow & Finch replaced monthly PDF reports with live links",
     summary: "A web agency moved 41 client sites to Lumen and swapped its monthly reporting day for shared dashboards clients actually open.",
     metrics: [
       { value: 41, label: "client sites on one account" },

@@ -5,7 +5,7 @@ import { Magnetic } from "@/registry/kit/ui/magnetic";
 import { TextReveal } from "@/registry/kit/ui/reveal";
 
 export function CtaPanel({
-  title = "Your next release could be your calmest.",
+  title = "Your next release could be your calmest",
   description = "Set up in five minutes. Free plan, no credit card, cancel anytime.",
   primary = { label: "Create your first project", href: "/signup" },
   secondary = { label: "Talk to sales", href: "/contact" },

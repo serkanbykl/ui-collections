@@ -16,7 +16,7 @@ export interface NewsletterProps {
 const looksLikeEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 export function Newsletter({
-  title = "One good email a month.",
+  title = "One good email a month",
   description = "Product updates, engineering notes and nothing else. Unsubscribe in one click.",
   onSubscribe,
 }: NewsletterProps) {

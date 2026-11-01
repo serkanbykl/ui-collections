@@ -86,7 +86,7 @@ const defaultQuote = {
 export function CaseStudy({
   company = "Halcyon",
   industry = "Fintech",
-  title = "How Halcyon ships 2.6× more often, with 71% fewer rollbacks.",
+  title = "How Halcyon ships 2.6× more often, with 71% fewer rollbacks",
   summary = "A payments company with strict change control replaced its release spreadsheet with a review queue and an audit log its compliance team trusts.",
   metrics = defaultMetrics,
   facts = defaultFacts,
@@ -129,7 +129,7 @@ export function CaseStudy({
           <dl className="surface grid gap-4 rounded-card p-6 text-sm">
             {facts.map((f) => (
               <div key={f.label}>
-                <dt className="text-xs tracking-[0.15em] text-muted uppercase">{f.label}</dt>
+                <dt className="text-xs text-muted">{f.label}</dt>
                 <dd className="mt-1">{f.value}</dd>
               </div>
             ))}
@@ -192,7 +192,7 @@ export function CaseStudy({
         >
           <span className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 sm:px-8">
             <span>
-              <span className="block text-xs tracking-[0.2em] text-muted uppercase">Next story · {next.company}</span>
+              <span className="block text-xs text-muted">Next story · {next.company}</span>
               <span className="mt-2 block font-display text-3xl md:text-4xl">{next.title}</span>
             </span>
             <svg viewBox="0 0 24 24" className="size-8 shrink-0 text-muted transition-[translate,color] duration-300 ease-theme group-hover:translate-x-1 group-hover:text-fg" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden>

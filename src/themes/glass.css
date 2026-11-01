@@ -70,11 +70,11 @@
 
   --f-display: var(--font-glass-sans), ui-sans-serif, system-ui, sans-serif;
   --f-sans: var(--font-glass-sans), ui-sans-serif, system-ui, sans-serif;
-  --f-display-weight: 600;
+  --f-display-weight: 500;
   --f-display-tracking: -0.025em;
 
   --e-theme: cubic-bezier(0.22, 1, 0.36, 1);
-  --hover-scale: 1.015;
+  --hover-scale: 1;
   --press-scale: 0.985;
   --shine: 1;
 }

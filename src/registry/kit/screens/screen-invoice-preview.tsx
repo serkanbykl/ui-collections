@@ -149,7 +149,7 @@ export function InvoicePreviewScreen({ invoice = sampleInvoiceDocument, editHref
 
         <div className="mt-10 grid gap-6 border-y border-line py-6 sm:grid-cols-3 print:border-black/20">
           <div>
-            <p className="text-xs tracking-wide text-muted uppercase print:text-black/60">Billed to</p>
+            <p className="text-xs text-muted print:text-black/60">Billed to</p>
             <p className="mt-2 font-medium">{invoice.to.name}</p>
             {invoice.to.lines.map((l) => (
               <p key={l} className="text-sm text-muted print:text-black/70">
@@ -159,13 +159,13 @@ export function InvoicePreviewScreen({ invoice = sampleInvoiceDocument, editHref
             {invoice.to.email && <p className="text-sm text-muted print:text-black/70">{invoice.to.email}</p>}
           </div>
           <div>
-            <p className="text-xs tracking-wide text-muted uppercase print:text-black/60">Issued</p>
+            <p className="text-xs text-muted print:text-black/60">Issued</p>
             <p className="mt-2 text-sm">{invoice.issued}</p>
-            <p className="mt-4 text-xs tracking-wide text-muted uppercase print:text-black/60">Due</p>
+            <p className="mt-4 text-xs text-muted print:text-black/60">Due</p>
             <p className="mt-2 text-sm">{invoice.due}</p>
           </div>
           <div className="sm:text-right">
-            <p className="text-xs tracking-wide text-muted uppercase print:text-black/60">Amount due</p>
+            <p className="text-xs text-muted print:text-black/60">Amount due</p>
             <p className="mt-2 text-3xl font-semibold tracking-tight tabular-nums">{money.format(invoice.status === "paid" ? 0 : total)}</p>
           </div>
         </div>
@@ -173,7 +173,7 @@ export function InvoicePreviewScreen({ invoice = sampleInvoiceDocument, editHref
         <div className="mt-8 overflow-x-auto">
           <table className="w-full min-w-[30rem] text-sm">
             <thead>
-              <tr className="text-left text-xs tracking-wide text-muted uppercase print:text-black/60">
+              <tr className="text-left text-xs text-muted print:text-black/60">
                 <th className="pb-3 font-normal">Description</th>
                 <th className="pb-3 text-right font-normal">Qty</th>
                 <th className="pb-3 text-right font-normal">Rate</th>
@@ -213,7 +213,7 @@ export function InvoicePreviewScreen({ invoice = sampleInvoiceDocument, editHref
 
         <footer className="mt-12 grid gap-8 border-t border-line pt-6 text-sm sm:grid-cols-2 print:border-black/20">
           <div>
-            <p className="text-xs tracking-wide text-muted uppercase print:text-black/60">Pay by bank transfer</p>
+            <p className="text-xs text-muted print:text-black/60">Pay by bank transfer</p>
             <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
               {invoice.payment.map((p) => (
                 <div key={p.label} className="contents">
@@ -224,7 +224,7 @@ export function InvoicePreviewScreen({ invoice = sampleInvoiceDocument, editHref
             </dl>
           </div>
           <div>
-            <p className="text-xs tracking-wide text-muted uppercase print:text-black/60">Notes</p>
+            <p className="text-xs text-muted print:text-black/60">Notes</p>
             <p className="mt-2 leading-relaxed text-muted print:text-black/70">{invoice.notes}</p>
             {invoice.from.email && <p className="mt-2 text-muted print:text-black/70">Questions? {invoice.from.email}</p>}
           </div>

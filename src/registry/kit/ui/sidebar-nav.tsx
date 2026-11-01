@@ -143,7 +143,7 @@ export function SidebarNav({ groups, currentHref, linkAs: Link = "a", onNavigate
       {visible.map((group, i) => (
         <div key={group.label ?? i} className={cn(i > 0 && "mt-5")}>
           {group.label && (
-            <div className="px-3 pb-2 text-[11px] font-medium tracking-[0.16em] text-subtle uppercase">{group.label}</div>
+            <div className="px-3 pb-2 text-xs font-medium text-subtle">{group.label}</div>
           )}
           <ul className="flex flex-col gap-0.5">
             {group.items.map((item) => (

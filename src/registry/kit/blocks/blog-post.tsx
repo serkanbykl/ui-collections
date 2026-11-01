@@ -238,11 +238,11 @@ export function BlogPost({
             </nav>
           </details>
           <nav aria-label="Table of contents" className="hidden lg:block">
-            <p className="mb-3 text-xs font-medium tracking-[0.2em] text-muted uppercase">On this page</p>
+            <p className="mb-3 text-xs font-medium text-muted">On this page</p>
             {toc}
           </nav>
           <div className="mt-8 hidden lg:block">
-            <p className="mb-2 text-xs font-medium tracking-[0.2em] text-muted uppercase">Share</p>
+            <p className="mb-2 text-xs font-medium text-muted">Share</p>
             <ShareRow title={title} url={url} onShare={onShare} />
           </div>
         </aside>
@@ -277,7 +277,7 @@ export function BlogPost({
             <div className="surface mt-14 flex flex-col gap-4 rounded-card p-6 sm:flex-row sm:items-start">
               <Avatar src={author.avatar} alt={author.name} size="lg" fallbackClassName={`bg-linear-to-br ${tints[0]} text-accent-fg`} />
               <div>
-                <p className="text-xs tracking-[0.2em] text-muted uppercase">Written by</p>
+                <p className="text-xs text-muted">Written by</p>
                 <p className="mt-1 font-medium">{author.name}</p>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{author.bio}</p>
                 {author.href && (

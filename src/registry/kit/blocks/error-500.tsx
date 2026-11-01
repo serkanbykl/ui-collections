@@ -20,7 +20,7 @@ export interface Error500Props {
 }
 
 export function Error500({
-  title = "Something broke on our side.",
+  title = "Something broke on our side",
   description = "Your work is saved. We've logged the error and the on-call engineer has been paged.",
   reference = "ERR-7Q4K-2291",
   homeHref = "/",

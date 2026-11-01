@@ -19,7 +19,7 @@ export interface Error403Props {
 }
 
 export function Error403({
-  title = "You don't have access to this page.",
+  title = "You don't have access to this page",
   description = "It belongs to the Finance workspace. An admin can add you, usually within a working day.",
   account = { name: "Ada Lindqvist", email: "ada@northwind.dev" },
   homeHref = "/",

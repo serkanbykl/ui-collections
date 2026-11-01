@@ -90,7 +90,6 @@ function MapIllustration({ offices, active }: { offices: Office[]; active?: stri
           className="absolute -translate-x-1/2 -translate-y-1/2"
           style={{ left: `${office.pin.x}%`, top: `${office.pin.y}%` }}
         >
-          <span className={cn("absolute inset-0 rounded-full bg-accent/40 motion-safe:animate-ping", active !== office.city && "hidden")} />
           <span className={cn("relative block size-3 rounded-full bg-accent ring-4 ring-accent/20 transition-[scale] duration-300 ease-theme", active === office.city && "scale-125")} />
           <span className="absolute top-4 left-1/2 -translate-x-1/2 rounded-control bg-bg/80 px-1.5 py-0.5 text-[11px] whitespace-nowrap text-fg">{office.city}</span>
         </span>
@@ -101,7 +100,7 @@ function MapIllustration({ offices, active }: { offices: Office[]; active?: stri
 
 export function ContactPage({
   eyebrow = "Contact",
-  title = "Talk to a person, not a queue.",
+  title = "Talk to a person, not a queue",
   lead = "Pick the team that fits, or write to us below. Every message is read by someone who can actually help.",
   headingLevel = "h1",
   channels = defaultChannels,

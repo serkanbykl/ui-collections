@@ -48,7 +48,7 @@ export function AuthLockScreen({
 
       {unlocked ? (
         <p role="status" className="mt-8 rounded-control bg-success-soft px-4 py-3 text-center text-sm text-success">
-          Welcome back, {user.name.split(" ")[0]}. Your session is open again.
+          Unlocked as {user.name}. Your session is open again.
         </p>
       ) : (
         <form

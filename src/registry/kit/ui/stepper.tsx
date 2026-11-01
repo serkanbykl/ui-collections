@@ -31,7 +31,7 @@ export function Stepper({ steps, current, onStepSelect, className }: StepperProp
       <span aria-hidden className="absolute top-[18px] h-px bg-fg/12" style={{ left: inset, right: inset }} />
       <span
         aria-hidden
-        className="absolute top-[18px] h-px origin-left bg-accent shadow-[0_0_8px_var(--color-accent)] transition-transform duration-700 ease-theme"
+        className="absolute top-[18px] h-px origin-left bg-accent transition-transform duration-700 ease-theme"
         style={{ left: inset, right: inset, transform: `scaleX(${progress})` } as CSSProperties}
       />
       {steps.map((step, i) => {

@@ -18,7 +18,7 @@ export default function ThemeTunerDemo({ theme = "glass" }: { theme?: keyof type
       {/* The values restyle everything inside this element, and nothing outside it. */}
       <div {...tunerProps(controls, values)} className="grid gap-4">
         <div className="surface rounded-card p-7">
-          <div className="text-xs tracking-[0.18em] text-muted uppercase">Preview</div>
+          <div className="text-xs text-muted">Preview</div>
           <p className="mt-4 font-display text-3xl leading-tight">Change a dial and watch the surface follow.</p>
         </div>
         <Button className="justify-self-start">Publish changes</Button>

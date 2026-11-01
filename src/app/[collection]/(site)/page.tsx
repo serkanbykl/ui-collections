@@ -75,14 +75,14 @@ function Playground({ id, title }: { id: string; title: string }) {
         <AuroraBackdrop />
 
         <SpotlightCard className="p-7 sm:col-span-2">
-          <div className="text-xs tracking-[0.18em] text-muted uppercase">Spotlight card</div>
+          <div className="text-xs text-muted">Spotlight card</div>
           <p className="mt-4 max-w-md font-display text-3xl leading-tight md:text-4xl">
             Move the pointer across this card, then change a dial.
           </p>
         </SpotlightCard>
 
         <div className="surface grid content-between gap-6 rounded-card p-6">
-          <div className="text-xs tracking-[0.18em] text-muted uppercase">Buttons</div>
+          <div className="text-xs text-muted">Buttons</div>
           <div className="flex flex-wrap items-center gap-3">
             <Magnetic>
               <Link href="/blocks" className={buttonVariants()}>
@@ -99,7 +99,7 @@ function Playground({ id, title }: { id: string; title: string }) {
         </div>
 
         <div className="surface grid content-between gap-6 rounded-card p-6">
-          <div className="text-xs tracking-[0.18em] text-muted uppercase">Segmented</div>
+          <div className="text-xs text-muted">Segmented</div>
           <SegmentedControl
             aria-label="View"
             defaultValue="week"
@@ -113,12 +113,12 @@ function Playground({ id, title }: { id: string; title: string }) {
         </div>
 
         <div className="surface grid gap-4 rounded-card p-6">
-          <div className="text-xs tracking-[0.18em] text-muted uppercase">Field</div>
+          <div className="text-xs text-muted">Field</div>
           <Input label="Type something" name="playground" autoComplete="off" />
         </div>
 
         <div className="surface grid content-between gap-4 rounded-card p-6">
-          <div className="text-xs tracking-[0.18em] text-muted uppercase">Ticker</div>
+          <div className="text-xs text-muted">Ticker</div>
           <div className="font-display text-6xl">
             <NumberTicker value={listedCatalog.length} />
             <span className="ml-2 font-sans text-sm font-normal tracking-normal text-muted">pieces</span>
@@ -153,11 +153,12 @@ export default async function Home() {
           <Reveal trigger="load">
             <a
               href="#about"
-              className="surface inline-flex items-center gap-2 rounded-control py-1.5 pr-4 pl-1.5 text-xs text-fg/85 transition-colors hover:text-fg"
+              className="inline-flex items-center gap-2 rounded-control text-sm text-muted transition-colors hover:text-fg"
             >
-              <span className="rounded-control bg-accent px-2 py-0.5 font-medium text-accent-fg">
+              <span className="font-medium text-fg tabular-nums">
                 {listedCatalog.length} {c.home.badge}
               </span>
+              <span aria-hidden>·</span>
               by {author.name}
             </a>
           </Reveal>
@@ -247,7 +248,7 @@ export default async function Home() {
                       href={`/${category}`}
                       className="flex h-full flex-col p-7 outline-none focus-visible:bg-hover"
                     >
-                      <span className="text-xs tracking-[0.18em] text-muted uppercase tabular-nums">
+                      <span className="text-xs text-muted tabular-nums">
                         {count > 0 ? `${count} ${count === 1 ? "item" : "items"}` : "Coming soon"}
                       </span>
                       <h3 className="mt-8 font-display text-4xl">{categories[category].title}</h3>
@@ -333,7 +334,7 @@ export default async function Home() {
             </div>
             <Reveal delay={350}>
               <SpotlightCard className="p-8">
-                <div className="text-xs tracking-[0.18em] text-muted uppercase">{author.role}</div>
+                <div className="text-xs text-muted">{author.role}</div>
                 <p className="mt-4 font-display text-4xl">{author.name}</p>
                 <a
                   href={homeOrigin()}

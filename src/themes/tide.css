@@ -51,7 +51,7 @@
 
   --f-display: var(--font-tide-sans), ui-sans-serif, system-ui, sans-serif;
   --f-sans: var(--font-tide-sans), ui-sans-serif, system-ui, sans-serif;
-  --f-display-weight: 600;
+  --f-display-weight: 500;
   --f-display-tracking: -0.025em;
 
   --e-theme: cubic-bezier(0.2, 0, 0, 1);

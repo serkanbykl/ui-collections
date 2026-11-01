@@ -58,7 +58,7 @@ export default function Layout({ children }) {
  */
 export function InstallSnippet({
   eyebrow = "How it works",
-  title = "Live before your coffee cools.",
+  title = "Live before your coffee cools",
   description = "Three steps, no config files and nobody from IT.",
   steps = defaultSteps,
   snippets = defaultSnippets,

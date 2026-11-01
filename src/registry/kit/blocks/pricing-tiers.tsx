@@ -51,7 +51,7 @@ const defaultTiers: Tier[] = [
 ];
 
 export function PricingTiers({
-  title = "Simple pricing that scales with you.",
+  title = "Free to start, then priced per seat",
   tiers = defaultTiers,
   ctaHref = "/signup",
   unit = "/ seat / month",

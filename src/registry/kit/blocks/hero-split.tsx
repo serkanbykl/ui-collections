@@ -21,7 +21,7 @@ const tasks = [
 
 export function HeroSplit({
   eyebrow = "Project tracking, minus the noise",
-  title = "Plan less. Ship more.",
+  title = "Plan less, ship more",
   description = "Cascade turns issues, reviews and releases into one quiet timeline, so your team can see what matters at a glance.",
   primary = { label: "Start free trial", href: "/signup" },
   secondary = { label: "Book a demo", href: "/demo" },
@@ -32,7 +32,7 @@ export function HeroSplit({
       <AuroraBackdrop grid={false} />
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:px-8 lg:grid-cols-2 lg:py-32">
         <div>
-          <Reveal trigger="load" className="text-xs tracking-[0.2em] text-muted uppercase">
+          <Reveal trigger="load" className="text-xs text-muted">
             {eyebrow}
           </Reveal>
           <TextReveal

@@ -8,10 +8,10 @@ export interface LogoCloudProps {
 
 const defaultNames = ["Northwind", "Polaris", "Kitebase", "Halcyon", "Orbitly", "Quarry", "Fernhill", "Lattice", "Monolith"];
 
-export function LogoCloud({ title = "Trusted by teams shipping every day", names = defaultNames }: LogoCloudProps) {
+export function LogoCloud({ title = "Running in production at", names = defaultNames }: LogoCloudProps) {
   return (
     <section className="bg-bg py-16 text-fg md:py-20">
-      <p className="px-6 text-center text-xs tracking-[0.2em] text-muted uppercase">{title}</p>
+      <p className="px-6 text-center text-xs text-muted">{title}</p>
       <Marquee duration={40} className="mt-10" gap="4rem">
         {names.map((name, i) => (
           <span

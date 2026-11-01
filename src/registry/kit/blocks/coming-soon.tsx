@@ -43,7 +43,7 @@ export function ComingSoon({
   logo,
   homeHref = "/",
   eyebrow = "Lumen Docs · Public beta",
-  title = "Docs your team will keep up to date.",
+  title = "Docs your team will keep up to date",
   description = "Write once, publish to web, PDF and in-app help. Join 2,417 teams on the launch list.",
   launchAt,
   privacyHref = "/privacy",
@@ -106,7 +106,7 @@ export function ComingSoon({
                     <span className="block font-display text-4xl leading-none tabular-nums sm:text-5xl">
                       {left === undefined ? "--" : String(part.value).padStart(2, "0")}
                     </span>
-                    <span className="mt-2 block text-[11px] tracking-wide text-muted uppercase sm:text-xs">{part.label}</span>
+                    <span className="mt-2 block text-xs text-muted">{part.label}</span>
                   </div>
                 ))}
               </div>

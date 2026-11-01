@@ -228,7 +228,7 @@ export function HelpArticleScreen({
         </article>
 
         <nav aria-label="Table of contents" className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
-          <p className="text-xs font-medium tracking-wide text-muted uppercase">On this page</p>
+          <p className="text-xs font-medium text-muted">On this page</p>
           <ol className="mt-3 grid gap-0.5 border-l border-line">
             {article.sections.map((s) => (
               <li key={s.id}>

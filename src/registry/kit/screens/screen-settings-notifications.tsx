@@ -158,7 +158,7 @@ export function SettingsNotificationsScreen({
           {groups.map((group) => (
             <div role="rowgroup" key={group}>
               <div role="row" className="pt-5 pb-1">
-                <span role="rowheader" className="text-xs font-medium tracking-wide text-muted uppercase">
+                <span role="rowheader" className="text-xs font-medium text-muted">
                   {group}
                 </span>
               </div>

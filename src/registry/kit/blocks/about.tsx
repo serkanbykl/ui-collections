@@ -86,7 +86,7 @@ const defaultTeam: AboutMember[] = [
 
 export function About({
   eyebrow = "About Lumen",
-  title = "We build calm tools for teams that ship.",
+  title = "We build calm tools for teams that ship",
   lead = "Lumen takes the busywork out of reviews and releases, so your team spends Friday afternoons on the work, not the checklist.",
   headingLevel = "h1",
   stats = defaultStats,

@@ -3,7 +3,7 @@ import { ButtonShine, buttonVariants } from "@/registry/kit/ui/button";
 import { Reveal, TextReveal } from "@/registry/kit/ui/reveal";
 
 export function Error404({
-  title = "This page drifted away.",
+  title = "This page drifted away",
   description = "The link may be broken, or the page may have moved. Let's get you somewhere useful.",
   homeHref = "/",
   supportHref = "/contact",

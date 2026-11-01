@@ -17,7 +17,7 @@ const defaultItems: FaqItem[] = [
 ];
 
 export function Faq({
-  title = "Questions, answered.",
+  title = "Questions, answered",
   description = "Can't find what you need? A person replies within one working day.",
   items = defaultItems,
   contact = { label: "Email support", href: "/contact" },

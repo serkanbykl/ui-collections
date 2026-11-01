@@ -2,7 +2,6 @@ import { AuroraBackdrop } from "@/registry/kit/ui/aurora-backdrop";
 import { ButtonShine, buttonVariants } from "@/registry/kit/ui/button";
 import { Magnetic } from "@/registry/kit/ui/magnetic";
 import { Reveal, TextReveal } from "@/registry/kit/ui/reveal";
-import { Badge } from "@/registry/kit/ui/badge";
 
 export interface HeroAuroraProps {
   badge?: string;
@@ -17,9 +16,9 @@ export interface HeroAuroraProps {
 }
 
 export function HeroAurora({
-  badge = "Lumen 2.0 is here",
-  title = "Ship interfaces that feel weightless.",
-  description = "Lumen gives product teams a calm, fast design system: clear surfaces, gentle motion and components you own outright.",
+  badge = "Lumen 2.0 release notes",
+  title = "A calm design system your team owns outright",
+  description = "Clear surfaces, gentle motion and components that live in your own repo, so a redesign is an edit, not a migration.",
   primary = { label: "Start building free", href: "/signup" },
   secondary = { label: "Read the docs", href: "/docs" },
   badgeHref = "/changelog",
@@ -29,8 +28,7 @@ export function HeroAurora({
     <section className="relative isolate flex min-h-[44rem] flex-col items-center justify-center overflow-hidden bg-bg-deep px-6 py-28 text-center text-fg">
       <AuroraBackdrop />
       <Reveal trigger="load">
-        <a href={badgeHref} className="surface inline-flex items-center gap-2 rounded-control py-1.5 pr-4 pl-1.5 text-xs text-fg/85">
-          <Badge variant="accent-solid">New</Badge>
+        <a href={badgeHref} className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-fg">
           {badge}
           <span aria-hidden>→</span>
         </a>

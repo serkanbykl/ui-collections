@@ -42,7 +42,7 @@ export function EngineBadge({ engine, className }: { engine: Engine; className?:
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-control border px-2.5 py-0.5 text-[11px] tracking-[0.12em] uppercase",
+        "inline-flex items-center gap-1.5 rounded-control border px-2.5 py-0.5 text-xs",
         engine === "CSS" ? "border-accent/30 text-accent" : "border-fg/15 text-fg/70",
         className,
       )}
@@ -55,5 +55,5 @@ export function EngineBadge({ engine, className }: { engine: Engine; className?:
 }
 
 export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("text-xs tracking-[0.2em] text-muted uppercase", className)}>{children}</div>;
+  return <div className={cn("text-xs text-muted", className)}>{children}</div>;
 }

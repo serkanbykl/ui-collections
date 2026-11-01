@@ -19,7 +19,7 @@ const defaultMembers: Member[] = [
 
 const hues = ["from-accent/70 to-info/40", "from-info/70 to-accent/40", "from-success/70 to-info/40"];
 
-export function TeamGrid({ title = "The people behind it.", members = defaultMembers }: { title?: string; members?: Member[] }) {
+export function TeamGrid({ title = "The people behind it", members = defaultMembers }: { title?: string; members?: Member[] }) {
   return (
     <section className="bg-bg px-6 py-24 text-fg md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">

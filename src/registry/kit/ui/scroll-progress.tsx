@@ -75,7 +75,7 @@ export function ScrollProgress({ scope = "page", className }: ScrollProgressProp
         aria-hidden
         data-scope={scope}
         className={cn(
-          "kit-scroll-progress z-50 h-[2px] w-full bg-gradient-to-r from-accent/70 via-accent to-fg shadow-[0_0_10px_var(--color-accent)]",
+          "kit-scroll-progress z-50 h-[2px] w-full bg-accent",
           scope === "page" ? "fixed inset-x-0 top-0" : "sticky top-0",
           className,
         )}

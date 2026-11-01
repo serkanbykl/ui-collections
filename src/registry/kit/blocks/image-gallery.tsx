@@ -24,7 +24,7 @@ export interface ImageGalleryProps extends Omit<ImageCarouselProps, "label" | "i
 /** A section with a heading over an image carousel with captions and a thumbnail strip. */
 export function ImageGallery({
   eyebrow = "Wallpapers",
-  title = "Six new wallpapers for the autumn release.",
+  title = "Six new wallpapers for the autumn release",
   description = "Drawn in-house and sized 3200 × 2000. Pick one in Settings → Appearance; the dark ones save a little battery on OLED screens.",
   images = defaultImages,
   headingLevel = "h2",

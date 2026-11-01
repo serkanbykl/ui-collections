@@ -50,7 +50,7 @@ const specs: BlockSpec[] = [
     name: "Hero · Product",
     description: "Product-led hero: tight headline, one primary action, ticked proof points and a working product screen in an app window, with customer wordmarks underneath. Exports ProductPreview, a compact analytics screen whose range switch really switches the data.",
     engine: "CSS",
-    uses: ["app-window", "badge", "bar-list", "button", "chart-area", "live-indicator", "text-reveal", "segmented-control", "stat-card"],
+    uses: ["app-window", "bar-list", "button", "chart-area", "live-indicator", "text-reveal", "segmented-control", "stat-card"],
     dependencies: [cva],
     previewHeight: 1180,
     props: [
@@ -67,9 +67,9 @@ const specs: BlockSpec[] = [
   {
     slug: "hero-aurora",
     name: "Hero · Aurora",
-    description: "Centered launch hero over a drifting aurora, with a news pill, word-by-word headline and magnetic call to action.",
+    description: "Centered launch hero over a drifting aurora, with a release-notes link, word-by-word headline and magnetic call to action.",
     engine: "Motion",
-    uses: ["aurora-backdrop", "button", "magnetic", "text-reveal", "badge"],
+    uses: ["aurora-backdrop", "button", "magnetic", "text-reveal"],
     dependencies: ["motion", cva],
     previewHeight: 720,
     props: [

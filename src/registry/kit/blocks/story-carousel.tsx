@@ -129,7 +129,7 @@ function StoryCard({ story, index }: { story: Story; index: number }) {
 /** Customer stories as a swipeable row of equal-height cards with drawn covers, metric and quote. */
 export function StoryCarousel({
   eyebrow = "Customer stories",
-  title = "Teams that measured the difference.",
+  title = "Teams that measured the difference",
   description = "Numbers from their own dashboards, checked with each team before we published them.",
   stories = defaultStories,
   allHref = "/customers",

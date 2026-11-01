@@ -17,7 +17,7 @@ export type HeadingLevel = "h1" | "h2";
 export const tints = ["from-accent/70 to-info/40", "from-info/70 to-accent/40", "from-success/70 to-info/40", "from-warning/60 to-accent/40"];
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("text-xs font-medium tracking-[0.2em] text-accent uppercase", className)}>{children}</p>;
+  return <p className={cn("text-xs font-medium text-accent", className)}>{children}</p>;
 }
 
 /** Page header on the aurora. Renders the page's h1 unless `headingLevel` says otherwise. */

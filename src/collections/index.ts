@@ -41,7 +41,7 @@ export const collections = {
     tuner: { title: "Glass", controls: glassControls },
     home: {
       badge: "pieces",
-      title: "Liquid glass, poured into React.",
+      title: "Liquid glass, poured into React",
       lede: "Frosted surfaces, calm motion and a set of dials to tune them. CSS first, Motion where physics matter, and every line of it yours to copy.",
       playgroundTitle: "Six dials, every surface.",
       playgroundLede:
@@ -62,7 +62,7 @@ export const collections = {
     tuner: { title: "Theme", controls: tideControls },
     home: {
       badge: "pieces",
-      title: "Calm interfaces for busy products.",
+      title: "Calm interfaces for busy products",
       lede: "Crisp components for dashboards and admin tools: fresh green on cool slate, light and dark, five accents, and every line of it yours to copy.",
       playgroundTitle: "Four dials, every screen.",
       playgroundLede:

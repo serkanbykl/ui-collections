@@ -10,7 +10,7 @@ export default function HomeNotFound() {
       <main id="main" className="pointer-events-none relative z-20 flex min-h-dvh flex-col justify-end gap-4 px-6 pb-16 lg:px-[16vw] lg:pb-24">
         <div data-hamsi-avoid className="pointer-events-auto flex max-w-xl flex-col gap-3 text-[15px] leading-[1.7]">
           <p className="text-[13px] text-(--ink-soft)">404</p>
-          <h1 className="text-balance">Nothing swims at this address.</h1>
+          <h1 className="text-balance">Nothing swims at this address</h1>
           <p className="text-pretty text-(--ink-soft)">
             Components, blocks and templates live in each collection. Open one of them, or go back to the deep.
           </p>

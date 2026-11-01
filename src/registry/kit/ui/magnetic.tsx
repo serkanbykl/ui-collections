@@ -12,11 +12,15 @@ export interface MagneticProps {
   children: React.ReactNode;
   /** How far the content follows the pointer, as a fraction of its offset from centre. */
   strength?: number;
+  /** Farthest the content moves, in px. Keep it under the gap to the next item so it never slides under a neighbour. */
+  max?: number;
   className?: string;
 }
 
+const clamp = (value: number, max: number) => Math.max(-max, Math.min(max, value));
+
 /** Pulls its content toward a hovering mouse pointer and springs back on leave. */
-export function Magnetic({ children, strength = 0.18, className }: MagneticProps) {
+export function Magnetic({ children, strength = 0.18, max = 6, className }: MagneticProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, spring);
@@ -25,8 +29,8 @@ export function Magnetic({ children, strength = 0.18, className }: MagneticProps
   function onPointerMove(event: PointerEvent<HTMLSpanElement>) {
     if (event.pointerType !== "mouse") return;
     const rect = event.currentTarget.getBoundingClientRect();
-    x.set((event.clientX - rect.left - rect.width / 2) * strength);
-    y.set((event.clientY - rect.top - rect.height / 2) * strength);
+    x.set(clamp((event.clientX - rect.left - rect.width / 2) * strength, max));
+    y.set(clamp((event.clientY - rect.top - rect.height / 2) * strength, max));
   }
 
   function reset() {
@@ -37,7 +41,7 @@ export function Magnetic({ children, strength = 0.18, className }: MagneticProps
   return (
     <MotionScope>
       <m.span
-        className={cn("inline-block", className)}
+        className={cn("relative inline-block hover:z-10", className)}
         style={{ x: springX, y: springY }}
         onPointerMove={onPointerMove}
         onPointerLeave={reset}

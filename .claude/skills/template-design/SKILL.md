@@ -72,4 +72,4 @@ Useful headline shapes: "{Outcome} without {pain}", "The {category} for {audienc
 
 ## Visual style
 
-This skill sets no visual rules of its own: fonts, spacing, colour, gradients and icons come from the collection theme. Both collections use Geist, one face per collection.
+This skill sets no visual rules of its own: fonts, spacing, colour, gradients and icons come from the collection theme. Both collections use Geist, one face per collection. Before handing a page over, run it through the `design-review` skill (AGENTS.md rule 5).

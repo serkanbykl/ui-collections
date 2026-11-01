@@ -3,7 +3,7 @@ import { TiltCard } from "@/registry/kit/ui/tilt-card";
 export default function TiltCardDemo() {
   return (
     <TiltCard className="w-80 p-7">
-      <div className="flex items-center justify-between text-xs tracking-[0.18em] text-muted uppercase">
+      <div className="flex items-center justify-between text-xs text-muted">
         <span>Pro plan</span>
         <span>2026</span>
       </div>

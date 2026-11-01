@@ -7,7 +7,7 @@ export default function NotFound() {
     <main id="main" className="grid min-h-dvh place-items-center px-6 py-20 text-center">
       <div className="max-w-md">
         <p className="font-display text-7xl text-accent">404</p>
-        <h1 className="mt-4 font-display text-4xl">We couldn&apos;t find that page.</h1>
+        <h1 className="mt-4 font-display text-4xl">We couldn&apos;t find that page</h1>
         <p className="mt-4 leading-relaxed text-muted">
           The link may be old or mistyped. Everything in the library is one click away.
         </p>

@@ -65,7 +65,7 @@ export function AuthSignIn({
           {logo ?? <BrandMark />}
           {brand}
         </a>
-        <h1 className="mt-8 font-display text-4xl">Welcome back</h1>
+        <h1 className="mt-8 font-display text-4xl">Sign in</h1>
         <p className="mt-2 text-sm text-muted">Sign in to continue to your workspace.</p>
 
         <div className="mt-8 grid grid-cols-2 gap-3">

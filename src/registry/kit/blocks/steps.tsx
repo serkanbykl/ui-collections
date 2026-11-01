@@ -34,7 +34,7 @@ export interface StepsProps {
 /** How it works, in a few numbered steps joined by a hairline on wide screens. */
 export function Steps({
   eyebrow = "How it works",
-  title = "From commit to customer in three steps.",
+  title = "From commit to customer in three steps",
   description = "No new workflow to learn. It fits around the way your team already ships.",
   steps = defaultSteps,
 }: StepsProps) {
@@ -42,7 +42,7 @@ export function Steps({
     <section className="bg-bg px-6 py-24 text-fg md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
-          <div className="text-xs tracking-[0.2em] text-muted uppercase">{eyebrow}</div>
+          <div className="text-xs text-muted">{eyebrow}</div>
           <TextReveal as="h2" trigger="view" className="mt-5 font-display text-4xl leading-[1.02] md:text-6xl">
             {title}
           </TextReveal>

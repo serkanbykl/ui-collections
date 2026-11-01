@@ -27,7 +27,7 @@ function validate(v: ContactValues): Errors {
 }
 
 export function ContactSplit({
-  title = "Let's talk.",
+  title = "Let's talk",
   description = "Questions about plans, migrations or security reviews? A person replies within one working day.",
   email = "hello@lumen.dev",
   onSubmit,
@@ -60,7 +60,7 @@ export function ContactSplit({
           <dl className="mt-10 grid gap-5">
             {details.map((d) => (
               <div key={d.label}>
-                <dt className="text-xs tracking-[0.2em] text-muted uppercase">{d.label}</dt>
+                <dt className="text-xs text-muted">{d.label}</dt>
                 <dd className="mt-1">{d.value}</dd>
               </div>
             ))}

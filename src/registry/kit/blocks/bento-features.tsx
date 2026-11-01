@@ -120,7 +120,7 @@ const defaultItems: BentoItem[] = [
  */
 export function BentoFeatures({
   eyebrow = "What you get",
-  title = "See the problem, the cause and the owner on one screen.",
+  title = "See the problem, the cause and the owner on one screen",
   description = "Five things teams notice in their first week.",
   items = defaultItems,
   action,

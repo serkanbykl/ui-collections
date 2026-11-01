@@ -51,7 +51,7 @@ export function AuthSignInSplit({
   return (
     <AuthSplit quote={quote} proof={proof} side={formSide === "left" ? "right" : "left"}>
       <AuthBrand brand={brand} logo={logo} homeHref={homeHref} />
-      <h1 className="mt-10 font-display text-4xl">Welcome back</h1>
+      <h1 className="mt-10 font-display text-4xl">Sign in</h1>
       <p className="mt-2 text-sm text-muted">Sign in to pick up where your team left off.</p>
 
       <div className="mt-8">

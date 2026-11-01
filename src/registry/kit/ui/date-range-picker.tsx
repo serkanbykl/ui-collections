@@ -71,7 +71,7 @@ const calendarClasses = {
     "grid size-9 cursor-pointer place-items-center rounded-full text-muted outline-none transition-colors hover:bg-fg/10 hover:text-fg focus-visible:outline-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-30",
   month_grid: "border-collapse",
   weekdays: "",
-  weekday: "size-9 text-[11px] font-normal text-muted uppercase",
+  weekday: "size-9 text-xs font-normal text-muted",
   week: "",
   day: "relative size-9 p-0 text-center text-sm",
   day_button:

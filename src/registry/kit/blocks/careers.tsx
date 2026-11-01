@@ -54,7 +54,7 @@ export interface CareersProps {
 
 export function Careers({
   eyebrow = "Careers",
-  title = "Help teams ship with less noise.",
+  title = "Help teams ship with less noise",
   lead = "We're 38 people across 14 countries. Small teams, real ownership and a pace you can keep for years.",
   headingLevel = "h1",
   roles = defaultRoles,
@@ -148,7 +148,7 @@ export function Careers({
           <div className="mt-6 grid gap-10">
             {grouped.map((group) => (
               <div key={group.team}>
-                <h3 className="text-xs font-medium tracking-[0.2em] text-muted uppercase">
+                <h3 className="text-xs font-medium text-muted">
                   {group.team} <span className="tabular-nums">· {group.roles.length}</span>
                 </h3>
                 <ul className="mt-3 grid gap-2">

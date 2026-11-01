@@ -13,8 +13,8 @@ export interface FeatureBentoProps {
 }
 
 export function FeatureBento({
-  title = "Built for the way teams actually work.",
-  description = "Insights, automation and collaboration in one place, each a tap away.",
+  title = "Insights, automations and requests in one place",
+  description = "Live numbers, scheduled jobs and a shared queue, each one tap from the work it belongs to.",
 }: FeatureBentoProps) {
   return (
     <section className="relative isolate overflow-hidden bg-bg-deep px-6 py-24 text-fg md:px-8 md:py-32">

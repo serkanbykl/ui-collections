@@ -48,7 +48,7 @@ export function LiveIndicator({ status = "online", label, pulse, pill = false, c
             style={{ animation: "kit-pulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite" }}
           />
         )}
-        <span className="relative size-2.5 rounded-full bg-(--dot) shadow-[0_0_8px_var(--dot)]" />
+        <span className="relative size-2.5 rounded-full bg-(--dot)" />
       </span>
       {label ?? <span className="sr-only">{tone.text}</span>}
     </span>

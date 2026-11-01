@@ -613,7 +613,7 @@ export function DashboardFinance({ logo = <BrandGlyph />, content, ...props }: D
                   centerLabel={c.breakdownCenter}
                 />
                 <div className="mt-6 grid gap-4 border-t border-line pt-5">
-                  <h3 className="text-xs tracking-[0.14em] text-muted uppercase">{c.budgetsTitle}</h3>
+                  <h3 className="text-xs text-muted">{c.budgetsTitle}</h3>
                   {c.budgets.map((b) => {
                     const pct = Math.min(b.spent / b.limit, 1);
                     const over = b.spent > b.limit;

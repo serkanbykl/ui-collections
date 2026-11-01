@@ -17,7 +17,7 @@ const defaultItems: Testimonial[] = [
 ];
 
 export function Testimonials({
-  title = "Loved by people who ship.",
+  title = "What teams say after the switch",
   items = defaultItems,
 }: {
   title?: string;

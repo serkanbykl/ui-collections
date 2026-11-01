@@ -242,7 +242,7 @@ function PermissionGroup({
   return (
     <>
       <TableRow className="hover:bg-transparent">
-        <TableCell colSpan={roles.length + 1} className="pt-5 pb-2 text-xs font-medium tracking-wide text-muted uppercase">
+        <TableCell colSpan={roles.length + 1} className="pt-5 pb-2 text-xs font-medium text-muted">
           {group}
         </TableCell>
       </TableRow>
@@ -358,7 +358,7 @@ function RoleForm({
           <div className="grid gap-4 sm:grid-cols-2">
             {groups.map((group) => (
               <div key={group} className="grid content-start gap-2">
-                <p className="text-xs font-medium tracking-wide text-muted uppercase">{group}</p>
+                <p className="text-xs font-medium text-muted">{group}</p>
                 {permissions
                   .filter((p) => p.group === group)
                   .map((p) => (

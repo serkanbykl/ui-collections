@@ -72,7 +72,7 @@ export function FooterColumns({
           <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {columns.map((col) => (
               <div key={col.title}>
-                <h3 className="text-xs tracking-[0.2em] text-muted uppercase">{col.title}</h3>
+                <h3 className="text-xs text-muted">{col.title}</h3>
                 <ul className="mt-4 grid gap-2.5 text-sm">
                   {col.links.map((link) => (
                     <li key={link.label}>

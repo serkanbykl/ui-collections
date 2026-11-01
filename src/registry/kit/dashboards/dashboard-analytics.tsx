@@ -64,30 +64,52 @@ function walk(rand: () => number, n: number, start: number, drift: number, noise
   return out;
 }
 
+/** A slow wave with a little noise and a steady drift per day: rates and averages move like this. */
+function wave(rand: () => number, n: number, base: number, amp: number, drift: number) {
+  const phase = rand() * Math.PI * 2;
+  return Array.from({ length: n }, (_, i) => base + amp * Math.sin(i / 4 + phase) + (rand() - 0.5) * amp * 0.8 + drift * i);
+}
+
+const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+
+/** % change from the start of the range to its end, using the first and last quarter so one noisy day doesn't decide it. */
+function change(xs: number[]) {
+  const q = Math.max(2, Math.floor(xs.length / 4));
+  return (mean(xs.slice(-q)) / mean(xs.slice(0, q)) - 1) * 100;
+}
+
 function build(days: number, seed: number) {
   const rand = seeded(seed);
   const labels = Array.from({ length: days }, (_, i) => dayLabel.format(new Date(endDate - (days - 1 - i) * 86_400_000)));
   const visitors = walk(rand, days, 4200, 0.004, 900);
-  const previous = walk(rand, days, 3900, 0.002, 900);
+  // The period before trails this one by 4–12%, day to day, so the deltas read like real growth.
+  const previous = visitors.map((v) => Math.round(v * (0.88 + rand() * 0.08)));
   const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
   const total = sum(visitors);
   const prevTotal = sum(previous);
-  const conversion = 3.1 + rand() * 0.9;
+  // Each card gets its own series over the selected range, so no two sparklines repeat.
+  const perVisit = wave(rand, days, 2.7, 0.35, 0.003);
+  // A release-notes day: visitors read more pages than usual.
+  const launch = Math.floor(days * (0.5 + rand() * 0.35));
+  const pageViews = visitors.map((v, i) => Math.round(v * perVisit[i] * (i === launch ? 1.6 : 1)));
+  const prevPageViews = previous.map((v, i) => Math.round(v * (perVisit[i] - 0.08)));
+  const conversion = wave(rand, days, 3.3, 0.18, 0.006);
+  const session = wave(rand, days, 4.3, 0.15, -0.25 / days);
   return {
     labels,
     visitors,
     previous,
     kpis: [
-      { label: "Visitors", value: total, delta: (total / prevTotal - 1) * 100, trend: visitors.slice(-12) },
-      { label: "Page views", value: Math.round(total * 2.7), delta: (total / prevTotal - 1) * 100 + 3.2, trend: visitors.slice(-12).map((v) => v * 2.7) },
-      { label: "Conversion", value: conversion, delta: rand() * 0.8 - 0.2, decimals: 2, suffix: "%", trend: Array.from({ length: 12 }, () => 3 + rand()) },
-      { label: "Avg. session", value: 3 + rand() * 1.5, delta: -(rand() * 4), decimals: 1, suffix: " min", trend: Array.from({ length: 12 }, () => 3 + rand()) },
+      { label: "Visitors", value: total, delta: (total / prevTotal - 1) * 100, trend: visitors },
+      { label: "Page views", value: sum(pageViews), delta: (sum(pageViews) / sum(prevPageViews) - 1) * 100, trend: pageViews },
+      { label: "Conversion", value: mean(conversion), delta: change(conversion), decimals: 2, suffix: "%", trend: conversion },
+      { label: "Avg. session", value: mean(session), delta: change(session), decimals: 1, suffix: " min", trend: session },
     ],
     sources: [
       { label: "Organic search", value: Math.round(total * 0.46) },
       { label: "Direct", value: Math.round(total * 0.27) },
       { label: "Referral", value: Math.round(total * 0.16) },
-      { label: "Other", value: Math.round(total * 0.11) },
+      { label: "Other", value: total - Math.round(total * 0.46) - Math.round(total * 0.27) - Math.round(total * 0.16) },
     ],
     signups: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((_, i) => Math.round((days * 9 + rand() * days * 4) * (i >= 5 ? 0.55 : 1))),
     pages: [
@@ -294,12 +316,14 @@ function Panel({ title, action, className, children }: { title: string; action?:
 }
 
 function Delta({ value }: { value: number }) {
-  const up = value >= 0;
+  // Round first so a tiny dip doesn't show as a red "−0.0%".
+  const rounded = Math.round(value * 10) / 10;
+  const up = rounded >= 0;
   return (
     <Badge variant={up ? "success" : "danger"} className="gap-0.5 px-1.5 text-[11px] tabular-nums">
       <Icon name={up ? "up" : "down"} className="size-3" />
       {up ? "+" : "−"}
-      {Math.abs(value).toFixed(1)}%<span className="sr-only">{up ? " increase" : " decrease"}</span>
+      {Math.abs(rounded).toFixed(1)}%<span className="sr-only">{up ? " increase" : " decrease"}</span>
     </Badge>
   );
 }

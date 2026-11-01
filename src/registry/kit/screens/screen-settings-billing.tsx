@@ -154,7 +154,7 @@ export function SettingsBillingScreen({
           }
         >
           <div className="flex items-center gap-4">
-            <span aria-hidden className="grid h-11 w-16 shrink-0 place-items-center rounded-field bg-linear-to-br from-info/70 to-accent/70 text-xs font-bold tracking-wider text-bg">
+            <span aria-hidden className="grid h-11 w-16 shrink-0 place-items-center rounded-field bg-linear-to-br from-info/70 to-accent/70 text-xs font-semibold tracking-wider text-bg">
               {card.brand.toUpperCase()}
             </span>
             <div className="min-w-0">

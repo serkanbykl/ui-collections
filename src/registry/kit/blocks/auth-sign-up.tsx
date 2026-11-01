@@ -42,7 +42,7 @@ const labels = ["Too short", "Weak", "Fair", "Good", "Strong"];
 export function AuthSignUp({
   brand = "lumen",
   logo,
-  title = "Start shipping in minutes.",
+  title = "Start shipping in minutes",
   perks = defaultPerks,
   homeHref = "/",
   signInHref = "/signin",

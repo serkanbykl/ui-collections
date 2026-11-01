@@ -174,7 +174,7 @@ function Pricing() {
     <>
       <PricingTiers
         headingLevel="h1"
-        title="Simple pricing, based on events."
+        title="Simple pricing, based on events"
         tiers={tiers}
         ctaHref={href("/signup")}
         unit="/ month"
@@ -182,13 +182,13 @@ function Pricing() {
       />
       <PricingCompare title="Compare plans" plans={["Starter", "Growth", "Business"]} groups={compare} highlight={1} />
       <Faq
-        title="Billing, plainly."
+        title="Billing, plainly"
         description="Anything else? We answer every message ourselves."
         contact={{ label: "Email billing@lumen.example", href: "mailto:billing@lumen.example" }}
         items={pricingFaq}
       />
       <CtaPanel
-        title="Try every Growth feature free for 14 days."
+        title="Try every Growth feature free for 14 days"
         description={`Downgrade to Starter at any time and your history stays. ${riskReducer}`}
         primary={primaryCta}
         secondary={{ label: "Read the changelog", href: href("/changelog") }}
@@ -201,7 +201,7 @@ function ChangelogPage() {
   return (
     <>
       <Changelog title="What's new in Lumen" releases={releases} headingLevel="h1" />
-      <Newsletter title="Release notes, once a month." description="New features and the occasional analytics essay. Unsubscribe in one click." />
+      <Newsletter title="Release notes, once a month" description="New features and the occasional analytics essay. Unsubscribe in one click." />
     </>
   );
 }
@@ -346,7 +346,7 @@ const sitePages: SitePage[] = [
     chrome: "site",
     render: () => (
       <Customers
-        title="38,214 sites count visits with Lumen."
+        title="38,214 sites count visits with Lumen"
         lead="From personal blogs to listed retailers. Here's what changed for a few of them after the cookie banner went."
         stories={stories}
         signUpHref={href("/signup")}
@@ -386,7 +386,7 @@ const sitePages: SitePage[] = [
     chrome: "site",
     render: () => (
       <Careers
-        title="Build analytics people don't have to consent to."
+        title="Build analytics people don't have to consent to"
         lead="We're 27 people across 9 countries. Small teams, real ownership and a pace you can keep for years."
         roles={roles}
         roleHref={(role) => href(`/careers/${role.slug}`)}
@@ -465,7 +465,7 @@ const sitePages: SitePage[] = [
       <AuthSignUp
         brand="lumen"
         logo={logo}
-        title="Know your product in minutes."
+        title="Know your product in minutes"
         perks={["14-day free trial, no card required", "No cookies, no consent banner", "Import your Google Analytics history"]}
         homeHref={href("/")}
         signInHref={href("/signin")}
@@ -601,7 +601,7 @@ const sitePages: SitePage[] = [
     chrome: "site",
     render: () => (
       <Error404
-        title="We couldn't find that page."
+        title="We couldn't find that page"
         description="The link may be old or mistyped. The product, pricing and changelog are one click away."
         homeHref={href("/")}
         supportHref={href("/contact")}
@@ -648,7 +648,7 @@ const sitePages: SitePage[] = [
     chrome: "bare",
     render: () => (
       <Maintenance
-        title="We're moving to a faster database."
+        title="We're moving to a faster database"
         description="Your data is safe and visits are still being counted. Dashboards are paused until the move finishes."
         statusHref={href("/app/status")}
         privacyHref={href("/privacy")}
@@ -666,7 +666,7 @@ const sitePages: SitePage[] = [
         logo={logo}
         homeHref={href("/")}
         eyebrow="Lumen Heatmaps · Private beta"
-        title="See where visitors click, still without cookies."
+        title="See where visitors click, still without cookies"
         description="Aggregated click and scroll maps for every page. Join 2,417 teams on the launch list."
         privacyHref={href("/privacy")}
       />

@@ -22,7 +22,7 @@ const defaultSaved = [
 ];
 
 export function Offline({
-  title = "You're offline.",
+  title = "You're offline",
   description = "Changes you make are kept on this device and sync when you reconnect.",
   saved = defaultSaved,
   onRetry,
