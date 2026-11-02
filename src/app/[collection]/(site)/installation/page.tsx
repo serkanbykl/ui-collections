@@ -5,24 +5,11 @@ import { listedCatalog } from "@/catalog";
 import { getCollection } from "@/collections";
 import { CodeBlock, CommandLine } from "@/components/site/code-block";
 import { ComponentGrid } from "@/components/site/component-grid";
-import { installCommand } from "@/lib/site";
+import { fontSetup, installCommand, registryConfig, themeImports } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Installation",
   description: "Add components to a React project with the shadcn CLI.",
-};
-
-const fontSetup: Record<string, string> = {
-  glass: `import { Geist } from "next/font/google";
-
-const sans = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-glass-sans" });
-
-// <html data-theme="glass" className={sans.variable}>`,
-  tide: `import { Geist } from "next/font/google";
-
-const sans = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-tide-sans" });
-
-// <html data-theme="tide" data-mode="light" className={sans.variable}>`,
 };
 
 export default async function InstallationPage() {
@@ -35,20 +22,24 @@ export default async function InstallationPage() {
       code: <CommandLine command="npx shadcn@latest init" />,
     },
     {
+      title: "Register the collection",
+      body: `Add the ${c.name} registry to components.json once, so every piece is one short name away.`,
+      code: <CodeBlock code={registryConfig(c.id)} lang="json" title="components.json" />,
+    },
+    {
       title: "Add a component",
-      body: "The theme, the cn() helper, hooks and npm packages it needs come along automatically.",
-      code: <CommandLine command={installCommand(c.id, "button")} />,
+      body: "The theme, the cn() helper, hooks and npm packages it needs come along automatically. The full URL works too, without step 2.",
+      code: (
+        <div className="grid gap-3">
+          <CommandLine command={`npx shadcn@latest add @${c.id}/button`} />
+          <CommandLine command={installCommand(c.id, "button")} />
+        </div>
+      ),
     },
     {
       title: "Import the theme once",
       body: `Right after Tailwind in your global stylesheet: the shared base, then the ${c.name} theme.`,
-      code: (
-        <CodeBlock
-          code={`@import "tailwindcss";\n@import "../styles/base.css";\n@import "../styles/${c.id}.css";`}
-          lang="css"
-          title="globals.css"
-        />
-      ),
+      code: <CodeBlock code={themeImports(c.id)} lang="css" title="globals.css" />,
     },
     {
       title: "Set the theme and its fonts",
@@ -79,6 +70,23 @@ export default async function InstallationPage() {
           </li>
         ))}
       </ol>
+
+      <section className="mt-20 max-w-2xl">
+        <h2 className="font-display text-4xl">Find pieces from your project</h2>
+        <p className="mt-3 mb-6 text-muted">
+          With the collection registered, search and preview the registry without leaving the terminal. Pieces you add
+          later share the theme and the components already installed.
+        </p>
+        <div className="grid gap-3">
+          <CommandLine command={`npx shadcn@latest search @${c.id} -q chart`} />
+          <CommandLine command={`npx shadcn@latest view @${c.id}/date-range-picker`} />
+        </div>
+        <p className="mt-6 mb-4 text-muted">
+          Working with an AI coding agent? The shadcn MCP server lets it browse the {c.name} registry and install what a
+          screen needs, instead of writing its own version.
+        </p>
+        <CommandLine command="npx shadcn@latest mcp init --client claude" />
+      </section>
 
       <h2 className="mt-20 mb-6 font-display text-4xl">Browse everything</h2>
       <ComponentGrid entries={listedCatalog} />

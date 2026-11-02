@@ -75,6 +75,62 @@ npx shadcn@latest add https://ui-collections.vercel.app/r/glass/button.json
 
 Swap `glass` for `tide` to get the other finish. The code lands in your project; change it however you like.
 
+Then, once per project, import the theme right after Tailwind and set it on `<html>`:
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "../styles/base.css";
+@import "../styles/glass.css";
+```
+
+```tsx
+// app/layout.tsx: load Geist as --font-glass-sans, then
+<html data-theme="glass" className={sans.variable}>
+```
+
+For tide: `styles/tide.css`, `--font-tide-sans` and `<html data-theme="tide" data-mode="light">`.
+
+### Register the collection
+
+Add the registry to `components.json` and every piece is one short name away:
+
+```json
+{
+  "registries": {
+    "@glass": "https://ui-collections.vercel.app/r/glass/{name}.json"
+  }
+}
+```
+
+```sh
+npx shadcn@latest add @glass/button       # add by name
+npx shadcn@latest search @glass -q chart  # find pieces
+npx shadcn@latest mcp init --client claude  # let an AI agent browse and install them
+```
+
+## Start a project from Lumen
+
+Lumen installs as one item and brings every block, screen, dashboard and component it uses:
+
+```sh
+npx shadcn@latest add @glass/template-lumen
+```
+
+Set up the theme as above, then render it on one page:
+
+```tsx
+import { TemplateLumen } from "@/components/templates/template-lumen";
+
+export default function Page() {
+  return <TemplateLumen />;
+}
+```
+
+Pages switch on the URL hash (`#/pricing`, `#/app`), so it runs in any React app without router setup. `#/pages` lists every page. The copy lives in `components/templates/template-lumen-content.ts`.
+
+Need something Lumen doesn't use, such as a dock or the Dynamic Island? Add it from the same collection: `npx shadcn@latest add @glass/dynamic-island`. It shares the theme and the components already installed. Stick to one collection per project; the pieces are the same, only the theme file differs.
+
 ## Run it locally
 
 ```sh

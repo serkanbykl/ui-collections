@@ -10,7 +10,7 @@ import { CodeBlock, CommandLine } from "@/components/site/code-block";
 import { PreviewFrame } from "@/components/site/preview-frame";
 import { PreviewStage } from "@/components/site/preview-stage";
 import { demoFile, demos } from "@/demos";
-import { installCommand } from "@/lib/site";
+import { fontSetup, installCommand, registryConfig, themeImports } from "@/lib/site";
 import { collection } from "next/root-params";
 import { readSource } from "@/lib/source";
 
@@ -54,6 +54,55 @@ function DocSection({ title, children }: { title: string; children: React.ReactN
   );
 }
 
+/** What a template needs beyond the install command, and how to grow it from the rest of the collection. */
+function TemplateSetup({ collectionId, collectionName }: { collectionId: string; collectionName: string }) {
+  const steps = [
+    {
+      title: "Import the theme once",
+      body: "Right after Tailwind in your global stylesheet.",
+      code: <CodeBlock code={themeImports(collectionId)} lang="css" title="globals.css" />,
+    },
+    {
+      title: "Set the theme and its fonts",
+      body: `Put data-theme="${collectionId}" on <html>.`,
+      code: <CodeBlock code={fontSetup[collectionId] ?? ""} lang="tsx" title="app/layout.tsx" />,
+    },
+    {
+      title: "Render it on one page",
+      body: "As in Usage below. Pages switch on the URL hash (#/pricing, #/app), so it needs no router setup: one route is enough. #/pages lists every page.",
+      code: null,
+    },
+    {
+      title: "Add what it doesn't use",
+      body: `Register the ${collectionName} registry in components.json, then add any other piece by name. It lands next to the template's files and shares the same theme.`,
+      code: (
+        <div className="grid gap-3">
+          <CodeBlock code={registryConfig(collectionId)} lang="json" title="components.json" />
+          <CommandLine command={`npx shadcn@latest search @${collectionId}`} />
+          <CommandLine command={`npx shadcn@latest add @${collectionId}/dynamic-island`} />
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <DocSection title="Set up">
+      <ol className="grid gap-8">
+        {steps.map((step, i) => (
+          <li key={step.title} className="grid gap-3 md:grid-cols-[2.5rem_minmax(0,1fr)]">
+            <span className="font-display text-2xl text-accent tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+            <div className="min-w-0">
+              <h3 className="font-display text-2xl">{step.title}</h3>
+              <p className="mt-1.5 text-muted">{step.body}</p>
+              {step.code && <div className="mt-4">{step.code}</div>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </DocSection>
+  );
+}
+
 async function EntryDoc({ params }: { params: Params }) {
   const { category, slug } = await params;
   const entry = getEntry(category, slug);
@@ -71,6 +120,7 @@ async function EntryDoc({ params }: { params: Params }) {
   const next = siblings[index + 1];
   const packages = ["clsx", "tailwind-merge", ...(entry.dependencies ?? [])];
   const framed = categories[entry.category].framed;
+  const c = getCollection(await collection());
 
   return (
     <article>
@@ -96,7 +146,7 @@ async function EntryDoc({ params }: { params: Params }) {
       </div>
 
       <DocSection title="Installation">
-        <CommandLine command={installCommand(getCollection(await collection()).id, slug)} />
+        <CommandLine command={installCommand(c.id, slug)} />
         <p className="mt-4 text-sm leading-relaxed text-muted">
           Also installs the theme, <code className="text-fg/85">cn()</code>
           {entry.uses?.length ? <> and {entry.uses.join(", ")}</> : null}. Packages:{" "}
@@ -109,6 +159,8 @@ async function EntryDoc({ params }: { params: Params }) {
           .
         </p>
       </DocSection>
+
+      {entry.category === "templates" && <TemplateSetup collectionId={c.id} collectionName={c.name} />}
 
       <DocSection title="Usage">
         <CodeBlock code={usage} lang="tsx" title={`${slug}-demo.tsx`} />
