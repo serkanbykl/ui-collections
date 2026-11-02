@@ -90,7 +90,7 @@ export function ChartHeatmap({ values, endDate, label, unit = "", className }: C
               style={
                 {
                   backgroundColor: levels[level(v)],
-                  transitionDelay: shown ? `${Math.floor((i + lead) / 7) * 12}ms` : "0ms",
+                  transitionDelay: shown ? `calc(${Math.floor((i + lead) / 7) * 12}ms * var(--motion-scale, 1))` : "0ms",
                 } as CSSProperties
               }
             />

@@ -20,8 +20,9 @@ export interface FluidTabsProps<T extends string> {
   className?: string;
 }
 
-const glide = "420ms";
-const lag = "110ms";
+// Scaled by the theme's --motion-scale like every other transition.
+const glide = "calc(420ms * var(--motion-scale, 1))";
+const lag = "calc(110ms * var(--motion-scale, 1))";
 
 /**
  * Tabs whose surface pill stretches toward the next tab before its trailing

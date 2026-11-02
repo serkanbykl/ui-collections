@@ -42,13 +42,31 @@
   --ease-theme: var(--e-theme);
 }
 
+/* One knob for UI speed: every duration-* transition, the lift and the shared
+   enter, exit and reveal animations scale by it. Below 1 is faster. Ambient
+   loops (marquee, drift, spin, shimmer) keep their own pace. */
+:root {
+  --motion-scale: 0.8;
+}
+
+@utility duration-* {
+  --tw-duration: calc(--value(integer) * 1ms * var(--motion-scale, 1));
+  transition-duration: calc(--value(integer) * 1ms * var(--motion-scale, 1));
+}
+
+@utility delay-* {
+  transition-delay: calc(--value(integer) * 1ms * var(--motion-scale, 1));
+}
+
 @theme {
-  --animate-rise: rise 0.75s var(--e-theme) backwards;
+  /* transition-* without a duration-*. */
+  --default-transition-duration: calc(150ms * var(--motion-scale, 1));
+  --animate-rise: rise calc(0.75s * var(--motion-scale, 1)) var(--e-theme) backwards;
   --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
   --animate-drift: drift var(--drift-duration, 40s) ease-in-out infinite alternate;
-  --animate-pop-in: pop-in 0.2s var(--e-theme);
-  --animate-pop-out: pop-out 0.15s ease-in forwards;
-  --animate-fade-out: fade-out 0.15s ease-in forwards;
+  --animate-pop-in: pop-in calc(0.2s * var(--motion-scale, 1)) var(--e-theme);
+  --animate-pop-out: pop-out calc(0.15s * var(--motion-scale, 1)) ease-in forwards;
+  --animate-fade-out: fade-out calc(0.15s * var(--motion-scale, 1)) ease-in forwards;
   --animate-spin: spin 0.8s linear infinite;
   --animate-shimmer: shimmer 1.6s ease-in-out infinite;
 
@@ -129,9 +147,9 @@
    edge, keeping its own fill so it never turns see-through. */
 @utility lift {
   transition:
-    translate 0.3s var(--e-theme),
-    box-shadow 0.3s var(--e-theme),
-    border-color 0.3s var(--e-theme);
+    translate calc(0.3s * var(--motion-scale, 1)) var(--e-theme),
+    box-shadow calc(0.3s * var(--motion-scale, 1)) var(--e-theme),
+    border-color calc(0.3s * var(--motion-scale, 1)) var(--e-theme);
   &:hover,
   &:focus-visible {
     translate: 0 -3px;
@@ -212,7 +230,7 @@
 
   :is([data-reveal="in"] [data-reveal-part], [data-reveal="in"][data-reveal-part]) {
     animation: var(--animate-rise);
-    animation-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * var(--reveal-stagger, 45ms));
+    animation-delay: calc((var(--reveal-delay, 0ms) + var(--i, 0) * var(--reveal-stagger, 45ms)) * var(--motion-scale, 1));
   }
 
   /* Reduced motion calms a reveal rather than skipping it: parts fade in, in

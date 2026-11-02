@@ -1,6 +1,6 @@
 "use client";
 
-import { useInView, useMotionValue, useSpring } from "motion/react";
+import { animate, useInView, useMotionValue } from "motion/react";
 import { useEffect, useMemo, useRef } from "react";
 
 import { cn } from "@/registry/kit/lib/utils";
@@ -17,7 +17,10 @@ export interface NumberTickerProps {
   className?: string;
 }
 
-/** Counts up to `value` on a spring the first time it scrolls into view. Updates the DOM directly, not React state. */
+/** Seconds to count, before the theme's --motion-scale. Fixed, so a large number takes no longer than a small one. */
+const COUNT_SECONDS = 1.1;
+
+/** Counts up to `value`, easing out, the first time it scrolls into view. Updates the DOM directly, not React state. */
 export function NumberTicker({
   value,
   from = 0,
@@ -28,8 +31,7 @@ export function NumberTicker({
   className,
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const target = useMotionValue(from);
-  const spring = useSpring(target, { stiffness: 55, damping: 18, restDelta: 0.001 });
+  const current = useMotionValue(from);
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
   const format = useMemo(
     () => new Intl.NumberFormat(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }),
@@ -38,16 +40,18 @@ export function NumberTicker({
 
   useEffect(
     () =>
-      spring.on("change", (v) => {
+      current.on("change", (v) => {
         if (ref.current) ref.current.textContent = format.format(v);
       }),
-    [spring, format],
+    [current, format],
   );
 
   useEffect(() => {
-    if (!inView) return;
-    target.set(value);
-  }, [inView, value, target]);
+    if (!inView || !ref.current) return;
+    const scale = parseFloat(getComputedStyle(ref.current).getPropertyValue("--motion-scale")) || 1;
+    const controls = animate(current, value, { duration: COUNT_SECONDS * scale, ease: [0.16, 1, 0.3, 1] });
+    return () => controls.stop();
+  }, [inView, value, current]);
 
   return (
     <span className={cn("tabular-nums", className)}>

@@ -606,7 +606,7 @@ function InviteUserDialog({
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="grid gap-1.5">
+              <div className="grid min-w-0 gap-1.5">
                 <span id="invite-role" className="px-1 text-xs text-muted">
                   Role
                 </span>
@@ -621,7 +621,7 @@ function InviteUserDialog({
                   </SelectContent>
                 </Select>
               </div>
-              <div className="grid gap-1.5">
+              <div className="grid min-w-0 gap-1.5">
                 <span id="invite-team" className="px-1 text-xs text-muted">
                   Team
                 </span>

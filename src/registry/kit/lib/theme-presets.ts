@@ -25,11 +25,24 @@ export interface ChoiceControl {
   id: string;
   label: string;
   attribute: `data-${string}`;
-  options: { value: string; label: string }[];
+  /** `color` (hex) is what a ColorControl that `selects` this choice shows when the option is picked. */
+  options: { value: string; label: string; color?: string }[];
   default: string;
 }
 
-export type TunerControl = RangeControl | ChoiceControl;
+/** A colour well that writes one CSS custom property, such as a brand accent. */
+export interface ColorControl {
+  kind: "color";
+  id: string;
+  label: string;
+  variable: `--${string}`;
+  /** Hex, as the native colour input reads and writes it. */
+  default: string;
+  /** The choice that reads this colour: picking one selects it, and the colour is only written while it's selected. */
+  selects?: { id: string; value: string };
+}
+
+export type TunerControl = RangeControl | ChoiceControl | ColorControl;
 export type TunerValues = Record<string, number | string>;
 
 export function defaultValues(controls: TunerControl[]): TunerValues {
@@ -55,15 +68,18 @@ export const glassControls: TunerControl[] = [
     label: "Accent",
     attribute: "data-accent",
     options: [
-      { value: "teal", label: "Teal" },
-      { value: "green", label: "Green" },
-      { value: "sky", label: "Sky" },
-      { value: "violet", label: "Violet" },
-      { value: "amber", label: "Amber" },
-      { value: "rose", label: "Rose" },
+      // Colours are the light-mode accents; a custom accent keeps only their hue and chroma.
+      { value: "teal", label: "Teal", color: "#008384" },
+      { value: "green", label: "Green", color: "#00875c" },
+      { value: "sky", label: "Sky", color: "#1777b8" },
+      { value: "violet", label: "Violet", color: "#6a53bd" },
+      { value: "amber", label: "Amber", color: "#a45e00" },
+      { value: "rose", label: "Rose", color: "#bf395b" },
+      { value: "custom", label: "Custom" },
     ],
     default: "teal",
   },
+  { kind: "color", id: "accentColor", label: "Custom accent", variable: "--accent-custom", default: "#008384", selects: { id: "accent", value: "custom" } },
   {
     kind: "choice",
     id: "radius",
@@ -85,7 +101,7 @@ export const glassControls: TunerControl[] = [
   { kind: "range", id: "aurora", label: "Backdrop colour", variable: "--aurora-strength", min: 0, max: 100, step: 5, unit: "%", toCss: (v) => `${v / 100}`, default: 20 },
 ];
 
-/** Dials for the tide theme: data attributes read by tide.css. */
+/** Dials for the tide theme: data attributes and CSS variables read by tide.css. */
 export const tideControls: TunerControl[] = [
   {
     kind: "choice",
@@ -104,15 +120,18 @@ export const tideControls: TunerControl[] = [
     label: "Accent",
     attribute: "data-accent",
     options: [
-      { value: "green", label: "Green" },
-      { value: "teal", label: "Teal" },
-      { value: "olive", label: "Olive" },
-      { value: "gold", label: "Gold" },
-      { value: "sage", label: "Sage" },
-      { value: "kalamata", label: "Kalamata" },
+      // Colours are the light-mode accents; a custom accent keeps only their hue and chroma.
+      { value: "green", label: "Green", color: "#00875c" },
+      { value: "teal", label: "Teal", color: "#008384" },
+      { value: "olive", label: "Olive", color: "#467922" },
+      { value: "gold", label: "Gold", color: "#946800" },
+      { value: "sage", label: "Sage", color: "#537d5c" },
+      { value: "kalamata", label: "Kalamata", color: "#6d385c" },
+      { value: "custom", label: "Custom" },
     ],
     default: "green",
   },
+  { kind: "color", id: "accentColor", label: "Custom accent", variable: "--accent-custom", default: "#00875c", selects: { id: "accent", value: "custom" } },
   {
     kind: "choice",
     id: "radius",

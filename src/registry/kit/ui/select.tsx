@@ -13,7 +13,8 @@ export function SelectTrigger({ className, children, ...props }: ComponentProps<
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        "surface flex h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-field px-4 text-left text-sm text-fg outline-none",
+        // min-w-0: a long value truncates instead of widening a grid or flex column past its share.
+        "surface flex h-11 w-full min-w-0 cursor-pointer items-center justify-between gap-3 rounded-field px-4 text-left text-sm text-fg outline-none",
         "transition-[background-color] duration-300 hover:bg-surface-hover data-placeholder:text-muted",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
         "disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate",

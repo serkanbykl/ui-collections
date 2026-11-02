@@ -3,7 +3,8 @@
  * Dark by default; data-mode="light" switches to frosted glass over ice.
  * Implements the contract in src/themes/contract.ts.
  *
- * Attributes: data-accent teal | green | sky | violet | amber | rose,
+ * Attributes: data-accent teal | green | sky | violet | amber | rose | custom
+ *             (custom reads any colour from --accent-custom),
  *             data-radius sharp | balanced | rounded (default).
  *
  * Glass dials (set on :root or any ancestor to retune the glass inside):
@@ -153,6 +154,15 @@
   --c-accent-fg: hsl(345 60% 10%);
   --c-feature: hsl(345 52% 44%);
 }
+/* Custom: any CSS colour in --accent-custom (a brand colour, set at runtime).
+   Its hue and chroma are kept; lightness is the theme's own per mode, so text
+   on the accent keeps its contrast whatever colour is picked. */
+[data-theme="glass"][data-accent="custom"],
+[data-theme="glass"] [data-accent="custom"] {
+  --c-accent: oklch(from var(--accent-custom, oklch(0.55 0.1 195)) 0.86 min(c, 0.12) h);
+  --c-accent-fg: oklch(from var(--accent-custom, oklch(0.55 0.1 195)) 0.18 0.04 h);
+  --c-feature: oklch(from var(--accent-custom, oklch(0.55 0.1 195)) 0.45 min(c, 0.12) h);
+}
 :is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="green"] {
   --c-accent: oklch(0.55 0.125 163);
   --c-accent-fg: oklch(0.995 0 0);
@@ -166,12 +176,17 @@
   --c-accent-fg: oklch(0.99 0.01 290);
 }
 :is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="amber"] {
-  --c-accent: oklch(0.7 0.14 70);
-  --c-accent-fg: oklch(0.2 0.04 60);
+  /* Deep enough for white text to pass AA (5:1), like the other accents. */
+  --c-accent: oklch(0.55 0.13 65);
+  --c-accent-fg: oklch(0.995 0 0);
 }
 :is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="rose"] {
   --c-accent: oklch(0.55 0.17 10);
   --c-accent-fg: oklch(0.99 0.01 10);
+}
+:is([data-theme="glass"][data-mode="light"], [data-theme="glass"] [data-mode="light"])[data-accent="custom"] {
+  --c-accent: oklch(from var(--accent-custom, oklch(0.55 0.1 195)) 0.55 min(c, 0.16) h);
+  --c-accent-fg: oklch(0.995 0 0);
 }
 
 /* Corners. "rounded" is glass's own soft default; charts follow along. */

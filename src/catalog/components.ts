@@ -83,13 +83,13 @@ export const components: CatalogEntry[] = [
   {
     slug: "theme-tuner",
     name: "Theme Tuner",
-    description: "Sliders and choices that drive a theme's dials, such as glass blur or tide's mode and accent, for the whole page or one section.",
+    description: "Sliders, choices and a colour well that drive a theme's dials, such as glass blur or tide's mode and accent (any brand colour), for the whole page or one section.",
     category: "components",
     engine: "CSS",
     files: ["ui/theme-tuner.tsx"],
     uses: ["theme-presets"],
     props: [
-      { name: "controls", type: "TunerControl[]", description: "Range dials (CSS variables) and choice dials (data attributes). Presets: glassControls, tideControls." },
+      { name: "controls", type: "TunerControl[]", description: "Range and colour dials (CSS variables) and choice dials (data attributes). Presets: glassControls, tideControls; their Custom accent writes --accent-custom." },
       { name: "value / onChange", type: "TunerValues", description: "Controlled values. Start from defaultValues(controls)." },
       { name: "tunerProps()", type: "(controls, values) => props", description: "Style and data attributes that apply the values to an element and its subtree." },
       { name: "applyTuner() / tunerSnippet()", type: "function", description: "Write the values onto <html>, or format them as copyable CSS and HTML." },

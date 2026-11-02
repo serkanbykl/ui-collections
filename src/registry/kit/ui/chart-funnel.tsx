@@ -86,7 +86,7 @@ export function ChartFunnel({
                 style={{
                   height: `${share * 100}%`,
                   scale: shown ? "1 1" : "1 0",
-                  transitionDelay: `${i * 90}ms`,
+                  transitionDelay: `calc(${i * 90}ms * var(--motion-scale, 1))`,
                   background: `linear-gradient(to top, color-mix(in oklab, ${color} 85%, transparent), color-mix(in oklab, ${color} 55%, transparent))`,
                 }}
               />

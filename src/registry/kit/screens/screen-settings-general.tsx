@@ -217,7 +217,7 @@ export function SettingsGeneralScreen({
           description={`Times show in ${zoneLabel ?? form.timezone}. Today reads as ${formatSample(form.dateFormat)}.`}
         >
           <div className="grid gap-5 md:grid-cols-2">
-            <div className="grid gap-1.5">
+            <div className="grid min-w-0 gap-1.5">
               <span id={languageLabel} className="px-1 text-xs text-muted">
                 Interface language
               </span>
@@ -234,7 +234,7 @@ export function SettingsGeneralScreen({
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid gap-1.5">
+            <div className="grid min-w-0 gap-1.5">
               <span id={timezoneLabel} className="px-1 text-xs text-muted">
                 Time zone
               </span>

@@ -1,16 +1,24 @@
 "use client";
 
-import { useId, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 
 import { cn } from "@/registry/kit/lib/utils";
 
 import { defaultValues, type RangeControl, type TunerControl, type TunerValues } from "@/registry/kit/lib/theme-presets";
 
 export { defaultValues, glassControls, tideControls } from "@/registry/kit/lib/theme-presets";
-export type { ChoiceControl, RangeControl, TunerControl, TunerValues } from "@/registry/kit/lib/theme-presets";
+export type { ChoiceControl, ColorControl, RangeControl, TunerControl, TunerValues } from "@/registry/kit/lib/theme-presets";
 
 function cssValue(c: RangeControl, v: number) {
   return c.toCss ? c.toCss(v) : `${v}${c.unit}`;
+}
+
+const controlDefault = (controls: TunerControl[], id: string) => controls.find((c) => c.id === id)?.default;
+
+/** Picking a preset with a colour moves the colour wells tied to that choice onto it, so a custom accent starts from it. */
+function followColors(controls: TunerControl[], choiceId: string, color: string | undefined): TunerValues {
+  if (!color) return {};
+  return Object.fromEntries(controls.filter((c) => c.kind === "color" && c.selects?.id === choiceId).map((c) => [c.id, color]));
 }
 
 /**
@@ -23,7 +31,10 @@ export function tunerProps(controls: TunerControl[], values: TunerValues) {
   for (const c of controls) {
     const v = values[c.id] ?? c.default;
     if (c.kind === "range") style[c.variable] = cssValue(c, Number(v));
-    else attributes[c.attribute] = String(v);
+    else if (c.kind === "color") {
+      // Only while the choice that reads it is on, so snippets stay free of unused colours.
+      if (!c.selects || (values[c.selects.id] ?? controlDefault(controls, c.selects.id)) === c.selects.value) style[c.variable] = String(v);
+    } else attributes[c.attribute] = String(v);
   }
   return { style: style as CSSProperties, ...attributes };
 }
@@ -46,7 +57,81 @@ export function tunerSnippet(controls: TunerControl[], values: TunerValues) {
     .join("\n\n");
 }
 
-/** Slider and choice controls for theme dials. Controlled; pair with `tunerProps()` or `applyTuner()`. */
+/** How long a dragged colour rests before it restyles the page. */
+const COLOR_COMMIT_MS = 120;
+
+/**
+ * Native colour input. Dragging in the picker fires a change per pixel, and
+ * each one restyles the whole page (and any preview frames following it), so
+ * the swatch follows the pointer at once while the theme follows at most once
+ * per interval, and always lands on the last value.
+ */
+function ColorWell({
+  id,
+  label,
+  value,
+  active,
+  onCommit,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  active: boolean;
+  onCommit: (value: string) => void;
+}) {
+  const [draft, setDraft] = useState<string | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const pending = useRef<string | null>(null);
+  const latest = useRef(onCommit);
+  useEffect(() => {
+    latest.current = onCommit;
+  });
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const flush = () => {
+    clearTimeout(timer.current);
+    timer.current = undefined;
+    if (pending.current !== null) latest.current(pending.current);
+    pending.current = null;
+  };
+  const shown = draft ?? value;
+
+  return (
+    <div className="flex items-center justify-between gap-4 text-sm">
+      <label htmlFor={id} className="text-fg/85">
+        {label}
+      </label>
+      <span className="flex items-center gap-2.5">
+        <output htmlFor={id} className={cn("font-mono text-xs uppercase tabular-nums", active ? "text-muted" : "text-subtle")}>
+          {shown}
+        </output>
+        <input
+          id={id}
+          type="color"
+          value={shown}
+          onChange={(e) => {
+            setDraft(e.target.value);
+            pending.current = e.target.value;
+            // At most one restyle per interval while dragging; the last value always lands.
+            timer.current ??= setTimeout(flush, COLOR_COMMIT_MS);
+          }}
+          onBlur={() => {
+            flush();
+            setDraft(null);
+          }}
+          className={cn(
+            "size-8 cursor-pointer appearance-none rounded-control border border-line-strong bg-transparent p-0.5 transition-colors duration-200 hover:border-fg/40",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+            "[&::-webkit-color-swatch]:rounded-[calc(var(--radius-control)-2px)] [&::-webkit-color-swatch]:border-0 [&::-webkit-color-swatch-wrapper]:p-0",
+            "[&::-moz-color-swatch]:rounded-[calc(var(--radius-control)-2px)] [&::-moz-color-swatch]:border-0",
+          )}
+        />
+      </span>
+    </div>
+  );
+}
+
+/** Slider, choice and colour controls for theme dials. Controlled; pair with `tunerProps()` or `applyTuner()`. */
 export function ThemeTuner({
   controls,
   value,
@@ -88,7 +173,7 @@ export function ThemeTuner({
                       name={id}
                       value={o.value}
                       checked={current === o.value}
-                      onChange={() => onChange({ ...value, [c.id]: o.value })}
+                      onChange={() => onChange({ ...value, [c.id]: o.value, ...followColors(controls, c.id, o.color) })}
                       className="sr-only"
                     />
                     {o.label}
@@ -96,6 +181,19 @@ export function ThemeTuner({
                 ))}
               </div>
             </fieldset>
+          );
+        }
+
+        if (c.kind === "color") {
+          return (
+            <ColorWell
+              key={c.id}
+              id={id}
+              label={c.label}
+              value={String(current)}
+              active={!c.selects || (value[c.selects.id] ?? controlDefault(controls, c.selects.id)) === c.selects.value}
+              onCommit={(next) => onChange({ ...value, [c.id]: next, ...(c.selects ? { [c.selects.id]: c.selects.value } : {}) })}
+            />
           );
         }
 

@@ -79,7 +79,7 @@ export function NotificationBell({ items: initial, onItemsChange, variant = "ico
           className,
         )}
       >
-        <span className={cn("relative", unread && "motion-safe:[&_svg]:origin-top motion-safe:[&_svg]:animate-[bell-ring_0.9s_var(--e-theme)_1]")}>{bell}</span>
+        <span className={cn("relative", unread && "motion-safe:[&_svg]:origin-top motion-safe:[&_svg]:animate-[bell-ring_calc(0.9s*var(--motion-scale,1))_var(--e-theme)_1]")}>{bell}</span>
         {unread ? (
           <>
             <span className="tabular-nums">{count} new</span>

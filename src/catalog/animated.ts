@@ -64,7 +64,7 @@ export const animated: CatalogEntry[] = [
   {
     slug: "number-ticker",
     name: "Number Ticker",
-    description: "Counts up on a spring the first time it scrolls into view, writing straight to the DOM.",
+    description: "Counts up in under a second the first time it scrolls into view, whatever the size of the number, writing straight to the DOM.",
     category: "animated",
     engine: "Motion",
     files: ["ui/number-ticker.tsx"],

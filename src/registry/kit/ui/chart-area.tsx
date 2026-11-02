@@ -151,8 +151,8 @@ export function ChartArea({
                   strokeLinejoin="round"
                   pathLength={1}
                   strokeDasharray="1"
-                  className="transition-[stroke-dashoffset] duration-[1400ms] ease-theme"
-                  style={{ strokeDashoffset: shown ? 0 : 1, transitionDelay: `${i * 120}ms` }}
+                  className="transition-[stroke-dashoffset] duration-1400 ease-theme"
+                  style={{ strokeDashoffset: shown ? 0 : 1, transitionDelay: `calc(${i * 120}ms * var(--motion-scale, 1))` }}
                 />
               </g>
             );

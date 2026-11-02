@@ -101,7 +101,7 @@ export function ChartBar({
                           shown ? "scale-y-100" : "scale-y-0",
                           dimmed && "opacity-40",
                         )}
-                        style={{ transitionDelay: active === null ? `${cat * 40}ms` : "0ms" }}
+                        style={{ transitionDelay: active === null ? `calc(${cat * 40}ms * var(--motion-scale, 1))` : "0ms" }}
                       />
                       {isActive && (
                         <text x={bx + barWidth / 2} y={y(value) - 6} textAnchor="middle" fontSize="11" fill="var(--color-fg)" fontWeight="500">

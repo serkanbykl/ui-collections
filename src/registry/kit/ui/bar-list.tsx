@@ -51,7 +51,7 @@ export function BarList({ items, label, header, formatValue = (v) => v.toLocaleS
               <span
                 aria-hidden
                 className="absolute inset-y-0 left-0 origin-left rounded-[max(0.125rem,calc(var(--r-field)-0.25rem))] bg-accent/14 transition-[scale] duration-700 ease-theme"
-                style={{ width: `${(item.value / max) * 100}%`, scale: shown ? "1 1" : "0 1", transitionDelay: `${i * 60}ms` }}
+                style={{ width: `${(item.value / max) * 100}%`, scale: shown ? "1 1" : "0 1", transitionDelay: `calc(${i * 60}ms * var(--motion-scale, 1))` }}
               />
               <span className="relative flex min-w-0 items-center gap-2">
                 {item.leading}
