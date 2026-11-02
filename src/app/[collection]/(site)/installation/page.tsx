@@ -5,7 +5,7 @@ import { listedCatalog } from "@/catalog";
 import { getCollection } from "@/collections";
 import { CodeBlock, CommandLine } from "@/components/site/code-block";
 import { ComponentGrid } from "@/components/site/component-grid";
-import { fontSetup, installCommand, registryConfig, themeImports } from "@/lib/site";
+import { fontSetup, installCommand, registryConfig, shadcnInit, themeImports } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Installation",
@@ -18,8 +18,8 @@ export default async function InstallationPage() {
   const steps = [
     {
       title: "Start from a Tailwind CSS v4 project",
-      body: "Any React framework works. If shadcn isn't set up yet, initialise it once.",
-      code: <CommandLine command="npx shadcn@latest init" />,
+      body: "Any React framework works. Initialise shadcn once, on Radix: the components are built on it. The default (-d) picks Base UI, which breaks dialogs, menus and sheets on install.",
+      code: <CommandLine command={shadcnInit} />,
     },
     {
       title: "Register the collection",
@@ -38,7 +38,7 @@ export default async function InstallationPage() {
     },
     {
       title: "Import the theme once",
-      body: `Right after Tailwind in your global stylesheet: the shared base, then the ${c.name} theme.`,
+      body: `shadcn init fills your global stylesheet with its own colour variables, which override the theme's. Replace the whole file with Tailwind, the shared base and the ${c.name} theme.`,
       code: <CodeBlock code={themeImports(c.id)} lang="css" title="globals.css" />,
     },
     {

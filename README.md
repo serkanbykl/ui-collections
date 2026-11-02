@@ -67,7 +67,16 @@ Both collections ship the **same** components. Each one styles itself through a 
 
 ## Install a component
 
-Every piece is a [shadcn](https://ui.shadcn.com) registry entry. Open it on the site and copy its install command:
+Every piece is a [shadcn](https://ui.shadcn.com) registry entry. Start from a Tailwind CSS v4 project and initialise shadcn on **Radix**:
+
+```sh
+npx shadcn@latest init -b radix -p nova
+```
+
+> [!IMPORTANT]
+> Don't use `npx shadcn@latest init -d`. It picks the Base UI style (`base-nova`), and shadcn then rewrites `asChild` to Base UI's `render` prop while installing. These components are built on Radix, so dialogs, menus and sheets stop type-checking. `components.json` should say `"style": "radix-nova"`.
+
+Then open any piece on the site and copy its install command:
 
 ```sh
 npx shadcn@latest add https://ui-collections.vercel.app/r/glass/button.json
@@ -75,7 +84,7 @@ npx shadcn@latest add https://ui-collections.vercel.app/r/glass/button.json
 
 Swap `glass` for `tide` to get the other finish. The code lands in your project; change it however you like.
 
-Then, once per project, import the theme right after Tailwind and set it on `<html>`:
+Then, once per project, set up the theme. `shadcn init` writes its own colour variables into `globals.css` (`--color-accent`, `--color-muted`, `--color-card`…) that override the theme's, so **replace the whole file** with:
 
 ```css
 /* globals.css */
@@ -83,6 +92,8 @@ Then, once per project, import the theme right after Tailwind and set it on `<ht
 @import "../styles/base.css";
 @import "../styles/glass.css";
 ```
+
+and set the theme on `<html>`:
 
 ```tsx
 // app/layout.tsx: load Geist as --font-glass-sans, then
@@ -111,10 +122,10 @@ npx shadcn@latest mcp init --client claude  # let an AI agent browse and install
 
 ## Start a project from Lumen
 
-Lumen installs as one item and brings every block, screen, dashboard and component it uses:
+In a new project, initialise shadcn on Radix and register the collection as above. Lumen then installs as one item and brings every block, screen, dashboard and component it uses (about 170 files; `-o` replaces any starter files shadcn created):
 
 ```sh
-npx shadcn@latest add @glass/template-lumen
+npx shadcn@latest add @glass/template-lumen -y -o
 ```
 
 Set up the theme as above, then render it on one page:
@@ -128,6 +139,8 @@ export default function Page() {
 ```
 
 Pages switch on the URL hash (`#/pricing`, `#/app`), so it runs in any React app without router setup. `#/pages` lists every page. The copy lives in `components/templates/template-lumen-content.ts`.
+
+That's the quickest way to look around. For a product, move the pages you keep onto real routes (`app/pricing/page.tsx`, `app/app/users/page.tsx`): the server then sees each page, so you get per-page metadata, search indexing, server-side data and auth, and each page loads only its own code. Screens take their data as props (`<UsersScreen users={users} onInvite={invite} />`), and `AppShell` takes your router's link through `linkAs={Link}`. The full dashboards (`DashboardAnalytics`, `DashboardFinance`, `DashboardDevops`) bring their own sidebar, so render them outside an `AppShell` layout.
 
 Need something Lumen doesn't use, such as a dock or the Dynamic Island? Add it from the same collection: `npx shadcn@latest add @glass/dynamic-island`. It shares the theme and the components already installed. Stick to one collection per project; the pieces are the same, only the theme file differs.
 

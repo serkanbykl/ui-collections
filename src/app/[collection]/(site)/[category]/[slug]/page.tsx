@@ -10,7 +10,7 @@ import { CodeBlock, CommandLine } from "@/components/site/code-block";
 import { PreviewFrame } from "@/components/site/preview-frame";
 import { PreviewStage } from "@/components/site/preview-stage";
 import { demoFile, demos } from "@/demos";
-import { fontSetup, installCommand, registryConfig, themeImports } from "@/lib/site";
+import { fontSetup, installCommand, registryConfig, shadcnInit, themeImports } from "@/lib/site";
 import { collection } from "next/root-params";
 import { readSource } from "@/lib/source";
 
@@ -58,8 +58,13 @@ function DocSection({ title, children }: { title: string; children: React.ReactN
 function TemplateSetup({ collectionId, collectionName }: { collectionId: string; collectionName: string }) {
   const steps = [
     {
-      title: "Import the theme once",
-      body: "Right after Tailwind in your global stylesheet.",
+      title: "Initialise shadcn on Radix",
+      body: "Before the install command above, in a Tailwind CSS v4 project. The default (-d) picks Base UI, which breaks the template's dialogs, menus and sheets.",
+      code: <CommandLine command={shadcnInit} />,
+    },
+    {
+      title: "Replace your global stylesheet",
+      body: "shadcn init fills it with its own colour variables, which override the theme's. Keep only these lines.",
       code: <CodeBlock code={themeImports(collectionId)} lang="css" title="globals.css" />,
     },
     {
@@ -69,7 +74,7 @@ function TemplateSetup({ collectionId, collectionName }: { collectionId: string;
     },
     {
       title: "Render it on one page",
-      body: "As in Usage below. Pages switch on the URL hash (#/pricing, #/app), so it needs no router setup: one route is enough. #/pages lists every page.",
+      body: "As in Usage below. Pages switch on the URL hash (#/pricing, #/app), so it needs no router setup: one route is enough, and #/pages lists every page. That's for looking around; for a product, move the pages you keep onto real routes so each gets its own metadata, server data and auth. Screens take their data as props.",
       code: null,
     },
     {

@@ -4,6 +4,12 @@ import { registryBase } from "@/collections";
 export const installCommand = (collection: string, slug: string) =>
   `npx shadcn@latest add ${registryBase(collection)}/${slug}.json`;
 
+/**
+ * shadcn on Radix. The default (`init -d`) picks Base UI, and shadcn then rewrites `asChild` to
+ * Base UI's `render` prop on install, which our Radix-based components don't accept.
+ */
+export const shadcnInit = "npx shadcn@latest init -b radix -p nova";
+
 /** components.json entry that lets `npx shadcn add @<collection>/<slug>` resolve against a collection's registry. */
 export const registryConfig = (collection: string) =>
   JSON.stringify({ registries: { [`@${collection}`]: `${registryBase(collection)}/{name}.json` } }, null, 2);
