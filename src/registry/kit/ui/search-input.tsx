@@ -72,6 +72,8 @@ export function SearchInput({
         }}
         className={cn(
           "surface-field h-11 w-full rounded-control pr-12 pl-10 text-sm text-fg outline-none placeholder:text-muted/80",
+          // Compact rows (FilterBar) are 36 px high.
+          "in-data-[density=compact]:h-9",
           "transition-[border-color,background-color,box-shadow] duration-300 ease-theme",
           "hover:border-fg/20 focus:border-accent/50 focus:bg-field-focus",
           "focus:shadow-[0_0_0_4px_color-mix(in_oklab,var(--color-accent)_12%,transparent)]",

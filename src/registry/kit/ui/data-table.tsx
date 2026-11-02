@@ -220,7 +220,8 @@ export function DataTableColumnToggle<TData extends RowData>({ table }: { table:
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="sm" className="h-11 text-sm font-normal text-fg/85">
+        {/* Full height on its own; 36 px like the rest of a compact row (FilterBar). */}
+        <Button size="sm" className="h-11 text-sm font-normal text-fg/85 in-data-[density=compact]:h-9">
           <svg viewBox="0 0 24 24" aria-hidden className="size-4 text-muted" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
             <rect x="3.5" y="4.5" width="17" height="15" rx="3" />
             <path d="M9.5 4.5v15M14.5 4.5v15" />

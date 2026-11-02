@@ -4,13 +4,15 @@ import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 import { cn } from "@/registry/kit/lib/utils";
 
-export type ChipSize = "sm" | "md";
+/** sm 28, md 36, lg 44 px: the heights of Button xs, sm and md, so a chip lines up with the controls next to it. */
+export type ChipSize = "sm" | "md" | "lg";
 
 const base =
   "inline-flex shrink-0 items-center gap-1.5 rounded-control border font-medium whitespace-nowrap transition-[background-color,border-color,color,scale] duration-200 ease-theme select-none";
 const sizes: Record<ChipSize, string> = {
   sm: "h-7 px-2.5 text-xs [&_svg]:size-3.5",
   md: "h-9 px-3.5 text-[13px] [&_svg]:size-4",
+  lg: "h-11 px-4 text-sm [&_svg]:size-4",
 };
 const idle = "surface border-line text-fg/80";
 const on = "border-accent/45 bg-accent/12 text-accent";

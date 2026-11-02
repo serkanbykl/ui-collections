@@ -331,7 +331,7 @@ export const components: CatalogEntry[] = [
       { name: "onRemove", type: "() => void", description: "Adds a remove button; Backspace or Delete removes a focused chip." },
       { name: "onClick", type: "() => void", description: "Action chip." },
       { name: "icon / count", type: "ReactNode, number", description: "Leading icon or avatar; trailing count." },
-      { name: "size", type: '"sm" | "md"', default: '"md"', description: "28 or 36 px tall." },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "28, 36 or 44 px tall: the heights of Button xs, sm and md." },
       { name: "ChipGroup", type: "{ options, label, value, onValueChange, multiple?, deselectable?, scroll? }", description: "Filter group; arrow keys move between chips." },
       { name: "ChipInput", type: "{ value, onValueChange, label, validate?, max? }", description: "Enter, comma or paste adds; Backspace in an empty field removes the last chip." },
     ],

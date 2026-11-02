@@ -22,7 +22,7 @@ export const patterns: CatalogEntry[] = [
   {
     slug: "filter-bar",
     name: "Filter Bar",
-    description: "Layout for search, filters and actions above a list, with a reset button once anything is active.",
+    description: "Layout for search, filters and actions above a list, with a reset button once anything is active. Every control in the row sits at one compact height.",
     category: "patterns",
     engine: "CSS",
     uses: ["button"],

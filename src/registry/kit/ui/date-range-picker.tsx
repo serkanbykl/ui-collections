@@ -121,6 +121,8 @@ export function DateRangePicker({
         aria-label={`Date range: ${label}`}
         className={cn(
           "surface-field inline-flex h-11 cursor-pointer items-center gap-2 rounded-control px-4 text-sm whitespace-nowrap text-fg/90 outline-none",
+          // Compact rows (FilterBar) are 36 px high.
+          "in-data-[density=compact]:h-9 in-data-[density=compact]:px-3.5",
           "transition-[border-color,background-color] duration-300 ease-theme hover:border-fg/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
           "data-[state=open]:border-accent/50",
           className,

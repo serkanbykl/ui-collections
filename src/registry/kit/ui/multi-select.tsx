@@ -54,6 +54,8 @@ export function MultiSelect<T extends string>({
       <Popover.Trigger
         className={cn(
           "inline-flex h-11 cursor-pointer items-center gap-2 rounded-control border px-4 text-sm whitespace-nowrap outline-none",
+          // Compact rows (FilterBar) are 36 px high.
+          "in-data-[density=compact]:h-9 in-data-[density=compact]:px-3.5",
           "transition-[border-color,background-color,color] duration-300 ease-theme focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
           value.length
             ? "border-accent/40 bg-accent/[0.08] text-fg"
